@@ -1,4 +1,4 @@
-name: PR Validation-SpringBoot 
+name: PR Validation-React 
 
 on: 
   pull_request:
