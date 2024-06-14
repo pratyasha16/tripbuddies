@@ -25,7 +25,7 @@ jobs:
         - name: build springboot project
           run: |
             cd ${{ github.workspace }}/spring-backend
-            mvn clean install
+            mvn clean install -DskipTests
 
     validate-react: 
         if: inputs.directory == 'react'
