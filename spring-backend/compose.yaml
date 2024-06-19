@@ -8,3 +8,104 @@ services:
       - 5432:5432
     volumes:
       - ./create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+    networks:
+      - backend
+
+  account-service:
+    container_name: account-service 
+    build:
+      context: ./account-service/
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/trip
+    networks:
+      - backend
+    depends_on:
+      - postgres
+      - tripbuddies-service-registry
+
+  checkout-service:
+    container_name: checkout-service 
+    build:
+      context: ./checkout-service/
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:8080
+    env_file:
+      - .env
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/trip
+    networks:
+      - backend
+    depends_on:
+      - postgres
+      - tripbuddies-service-registry
+
+  identity-service:
+    container_name: identity-service 
+    build:
+      context: ./identity-service/
+      dockerfile: ./Dockerfile
+    ports:
+      - 8082:8080
+    env_file:
+      - .env
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/user_credentials
+    networks:
+      - backend
+    depends_on:
+      - postgres
+      - tripbuddies-service-registry
+
+  trip-service:
+    container_name: trip-service 
+    build:
+      context: ./trip-service/
+      dockerfile: ./Dockerfile
+    ports:
+      - 8083:8080
+    env_file:
+      - .env
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/trip
+    networks:
+      - backend
+    depends_on:
+      - postgres
+      - tripbuddies-service-registry
+
+  tripbuddies-gateway:
+    container_name: tripbuddies-gateway 
+    build:
+      context: ./tripbuddies-gateway/
+      dockerfile: ./Dockerfile
+    ports:
+      - 8084:8080
+    env_file:
+      - .env
+    networks:
+      - backend
+    depends_on:
+      - tripbuddies-service-registry
+      - account-service
+      - trip-service
+      - identity-service
+      - checkout-service
+
+  tripbuddies-service-registry:
+    container_name: tripbuddies-service-registry 
+    build:
+      context: ./tripbuddies-service-registry/
+      dockerfile: ./Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - backend
+
+networks:
+  backend:

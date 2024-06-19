@@ -1,5 +1,5 @@
 CREATE DATABASE user_credentials;
-CREATE DATABASE trips;
+CREATE DATABASE trip;
 CREATE DATABASE accounts;
 
 SELECT datname AS database_name
