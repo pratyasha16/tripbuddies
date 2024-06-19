@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_regusers_registeredusers",
+  "info": {
+    "displayName": "TripUsers",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

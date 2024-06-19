@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trips",
+  "info": {
+    "singularName": "trip",
+    "pluralName": "trips",
+    "displayName": "Trips",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "tripimage": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "agency": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::agency.agency",
+      "inversedBy": "trips"
+    },
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "bike",
+        "backpack"
+      ],
+      "required": true
+    },
+    "RegisteredUsers": {
+      "displayName": "registeredusers",
+      "type": "component",
+      "repeatable": true,
+      "component": "regusers.registeredusers"
+    }
+  }
+}
