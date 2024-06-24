@@ -1,0 +1,17 @@
+name: PR Validation-React 
+
+on: 
+  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: 
+    - main
+    paths:
+    - 'tripbuddies-cms/**'
+    
+
+jobs:
+  pr-validation-react:
+    uses: ./.github/workflows/job-build-services.yaml
+    with: 
+      directory: 'cms'
