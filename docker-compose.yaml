@@ -1,15 +1,28 @@
 services:
+  # postgres:
+  #   image: postgres
+  #   container_name: postgres
+  #   environment:
+  #     - POSTGRES_PASSWORD=postgres
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ./create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+  #   networks:
+  #     - backend
+  #     - cms
+
   account-service:
     container_name: account-service 
     build:
-      context: ./account-service/
+      context: spring-backend/account-service/
       dockerfile: ./Dockerfile
     ports:
-      - 8080:8080
+      - 8081:8080
     env_file:
       - .env
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/trip
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
     networks:
       - backend
     depends_on:
@@ -18,14 +31,14 @@ services:
   checkout-service:
     container_name: checkout-service 
     build:
-      context: ./checkout-service/
+      context: spring-backend/checkout-service/
       dockerfile: ./Dockerfile
     ports:
-      - 8081:8080
+      - 8082:8080
     env_file:
       - .env
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/trip
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
     networks:
       - backend
     depends_on:
@@ -34,31 +47,30 @@ services:
   identity-service:
     container_name: identity-service 
     build:
-      context: ./identity-service/
-      dockerfile: ./Dockerfile
-    ports:
-      - 8082:8080
-    env_file:
-      - .env
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/user_credentials
-    networks:
-      - backend
-    depends_on:
-      - postgres
-      - tripbuddies-service-registry
-
-  trip-service:
-    container_name: trip-service 
-    build:
-      context: ./trip-service/
+      context: spring-backend/identity-service/
       dockerfile: ./Dockerfile
     ports:
       - 8083:8080
     env_file:
       - .env
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/trip
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/user_credentials
+    networks:
+      - backend
+    depends_on:
+      - tripbuddies-service-registry
+
+  trip-service:
+    container_name: trip-service 
+    build:
+      context: spring-backend/trip-service/
+      dockerfile: ./Dockerfile
+    ports:
+      - 8084:8080
+    env_file:
+      - .env
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
     networks:
       - backend
     depends_on:
@@ -67,30 +79,45 @@ services:
   tripbuddies-gateway:
     container_name: tripbuddies-gateway 
     build:
-      context: ./tripbuddies-gateway/
+      context: spring-backend/tripbuddies-gateway/
       dockerfile: ./Dockerfile
     ports:
-      - 8084:8080
+      - 8085:8080
     env_file:
       - .env
-    networks:
-      - backend
     depends_on:
       - tripbuddies-service-registry
       - account-service
       - trip-service
       - identity-service
       - checkout-service
+    networks:
+      - backend
 
   tripbuddies-service-registry:
     container_name: tripbuddies-service-registry 
     build:
-      context: ./tripbuddies-service-registry/
+      context: spring-backend/tripbuddies-service-registry/
       dockerfile: ./Dockerfile
     ports:
       - 8761:8761
     networks:
       - backend
 
+  tripbuddies-cms:
+    container_name: strapi-tripbuddies
+    build:
+      context: tripbuddies-cms/
+      dockerfile: ./Dockerfile.prod
+      args:
+        - NODE_ENV=production
+    env_file:
+      - .env
+    networks:
+      - backend
+    ports:
+      - 1337:1337
+
+    
 networks:
   backend:
