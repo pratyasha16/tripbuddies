@@ -8,6 +8,7 @@ on:
     - main
     paths:
     - 'react-frontend/**'
+    - 'tripbuddies-cms/**'
 
 jobs:
   pr-validation-react:
