@@ -1,4 +1,4 @@
-name: PR Validation-CMS 
+name: PR Validation-React 
 
 on: 
   workflow_dispatch:
