@@ -362,77 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiAgencyAgency extends Schema.CollectionType {
-  collectionName: 'agencies';
-  info: {
-    singularName: 'agency';
-    pluralName: 'agencies';
-    displayName: 'Agencies';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    AgencyName: Attribute.String & Attribute.Required;
-    Email: Attribute.Email;
-    Documents: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    Mobile: Attribute.BigInteger & Attribute.Required;
-    trips: Attribute.Relation<
-      'api::agency.agency',
-      'oneToMany',
-      'api::trip.trip'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::agency.agency',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::agency.agency',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTripTrip extends Schema.CollectionType {
-  collectionName: 'trips';
-  info: {
-    singularName: 'trip';
-    pluralName: 'trips';
-    displayName: 'Trips';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
-    description: Attribute.Blocks;
-    tripimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    agency: Attribute.Relation<
-      'api::trip.trip',
-      'manyToOne',
-      'api::agency.agency'
-    >;
-    Category: Attribute.Enumeration<['bike', 'backpack']> & Attribute.Required;
-    RegisteredUsers: Attribute.Component<'regusers.registeredusers', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::trip.trip', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::trip.trip', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -859,6 +788,77 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAgencyAgency extends Schema.CollectionType {
+  collectionName: 'agencies';
+  info: {
+    singularName: 'agency';
+    pluralName: 'agencies';
+    displayName: 'Agencies';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AgencyName: Attribute.String & Attribute.Required;
+    Email: Attribute.Email;
+    Documents: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    Mobile: Attribute.BigInteger & Attribute.Required;
+    trips: Attribute.Relation<
+      'api::agency.agency',
+      'oneToMany',
+      'api::trip.trip'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::agency.agency',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::agency.agency',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTripTrip extends Schema.CollectionType {
+  collectionName: 'trips';
+  info: {
+    singularName: 'trip';
+    pluralName: 'trips';
+    displayName: 'Trips';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    description: Attribute.Blocks;
+    tripimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    agency: Attribute.Relation<
+      'api::trip.trip',
+      'manyToOne',
+      'api::agency.agency'
+    >;
+    Category: Attribute.Enumeration<['bike', 'backpack']> & Attribute.Required;
+    RegisteredUsers: Attribute.Component<'regusers.registeredusers', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::trip.trip', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::trip.trip', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -869,8 +869,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::agency.agency': ApiAgencyAgency;
-      'api::trip.trip': ApiTripTrip;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -879,6 +877,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::agency.agency': ApiAgencyAgency;
+      'api::trip.trip': ApiTripTrip;
     }
   }
 }
