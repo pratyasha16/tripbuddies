@@ -73,3 +73,27 @@ jobs:
             cd ${{ github.workspace }}/tripbuddies-cms
             CI=false npm run build
         
+    validate-iac:
+        if: inputs.directory == 'iac'
+        defaults:
+          run:
+            working-directory: IAC/dev
+        runs-on: ubuntu-latest
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID:  ${{ secrets.AZURE_TENANT_ID }}
+
+        steps:
+          - name: checkout
+            uses: actions/checkout@v4
+          
+          - name: Setup Terraform
+            uses: hashicorp/setup-terraform@v2.0.3
+          
+          - name: Terraform Init
+            run: terraform init
+          
+          - name: Terraform Validate
+            run: terraform validate
