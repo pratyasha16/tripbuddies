@@ -27,7 +27,6 @@ jobs:
       
       - name: build springboot project
         run: |
-          cd ${{ github.workspace }}/${{ matrix.module }}
           mvn clean install -DskipTests
 
       - name: Azure login
