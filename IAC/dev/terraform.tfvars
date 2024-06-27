@@ -1,5 +1,5 @@
 # Resource Group
-resource_group_name     = "tripbuddies-new-rg"
+resource_group_name     = "tripbuddies-rg"
 resource_group_location = "Central India"
 
 # Virtual Network
@@ -12,7 +12,7 @@ subnet_delegation_name         = "database"
 subnet_service_delegation_name = "Microsoft.DBforPostgreSQL/flexibleServers"
 
 # postgres
-postgres_name     = "tripbudpg"
+postgres_name     = "tripbuddies"
 postgres_username = "tripbuddies"
 postgres_password = "BeCreative@2024"
 

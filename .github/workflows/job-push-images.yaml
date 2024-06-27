@@ -1,0 +1,58 @@
+name: Build Image Template
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: spring-backend
+
+    strategy:
+      matrix:
+        module: [account-service, checkout-service, identity-service, trip-service, tripbuddies-gateway, tripbuddies-service-registry]
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with: 
+          java-version: '17'
+          distribution: 'temurin'  
+      
+      - name: build springboot project
+        run: |
+          cd ${{ github.workspace }}/${{ matrix.module }}
+          mvn clean install -DskipTests
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch ACR password
+        id: acr_password
+        run: | 
+          ACR_PASSWORD=$(az acr credential show --name tripbuddies --query 'passwords[0].value' -o tsv)
+          echo "acr_password=$ACR_PASSWORD" >> $GITHUB_OUTPUT
+
+      - name: ACR Login
+        uses: Azure/docker-login@v1
+        with:
+            login-server: tripbuddies.azurecr.io
+            username: ${{ vars.ACR_USER }}
+            password: ${{ steps.acr_password.outputs.acr_password }}
+
+      - name: Build and Push   
+        run: |
+            docker build -t tripbuddies.azurecr.io/${{ matrix.module }}:$(date +'%Y.%m.%d') .
+            docker push tripbuddies.azurecr.io/${{ matrix.module }}:$(date +'%Y.%m.%d')
+            docker build -t tripbuddies.azurecr.io/${{ matrix.module }}:latest .
+            docker push tripbuddies.azurecr.io/${{ matrix.module }}:latest
