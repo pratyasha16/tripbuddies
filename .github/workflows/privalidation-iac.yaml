@@ -17,6 +17,7 @@ permissions:
 jobs:
   pr-validation-springboot:
     uses: ./.github/workflows/job-build-services.yaml
+    secrets: inherit
     with: 
       directory: 'iac'
 
