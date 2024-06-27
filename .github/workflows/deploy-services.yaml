@@ -18,3 +18,4 @@ jobs:
   push-images:
     uses: ./.github/workflows/job-push-images.yaml
     secrets: inherit
+    needs: [deploy-infra]
