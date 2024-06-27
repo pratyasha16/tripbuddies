@@ -16,6 +16,10 @@ on:
         directory: 
             required: true
             type: string
+permissions:
+  id-token: write
+  contents: read
+
 
 jobs: 
     validate-springboot: 
