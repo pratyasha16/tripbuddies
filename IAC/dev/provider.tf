@@ -15,7 +15,7 @@ terraform {
 
 
   backend "azurerm" {
-    resource_group_name  = "tripbuddies-rg"
+    resource_group_name  = "tripbuddies-sa-rg"
     storage_account_name = "tripbuddies"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
