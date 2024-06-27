@@ -12,7 +12,8 @@ on:
           - destroy
   workflow_call:
     inputs:
-        directory: 
+        TFAction: 
+            description: 'apply or destroy infra' 
             required: true
             type: string
     
