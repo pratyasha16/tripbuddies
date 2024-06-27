@@ -9,6 +9,11 @@ on:
     paths:
     - 'IAC/**'
 
+permissions:
+  id-token: write
+  contents: read
+
+
 jobs:
   pr-validation-springboot:
     uses: ./.github/workflows/job-build-services.yaml
