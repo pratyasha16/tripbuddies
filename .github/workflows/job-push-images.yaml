@@ -11,7 +11,44 @@ permissions:
   id-token: write
     
 jobs:
-  build-image:
+  build-cms-image:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tripbuddies-cms/
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch ACR password
+        id: acr_password
+        run: | 
+          ACR_PASSWORD=$(az acr credential show --name tripbuddies --query 'passwords[0].value' -o tsv)
+          echo "acr_password=$ACR_PASSWORD" >> $GITHUB_OUTPUT
+
+      - name: ACR Login
+        uses: Azure/docker-login@v1
+        with:
+            login-server: tripbuddies.azurecr.io
+            username: ${{ vars.ACR_USER }}
+            password: ${{ steps.acr_password.outputs.acr_password }}
+
+      - name: Build and Push   
+        run: |
+            docker build -t tripbuddies.azurecr.io/tripbuddies-cms:$(date +'%Y.%m.%d') .
+            docker push tripbuddies.azurecr.io/tripbuddies-cms:$(date +'%Y.%m.%d')
+            docker build -t tripbuddies.azurecr.io/tripbuddies-cms:latest .
+            docker push tripbuddies.azurecr.io/tripbuddies-cms:latest
+            
+  build-java-images:
     runs-on: ubuntu-latest
     defaults:
       run:
