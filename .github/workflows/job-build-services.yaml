@@ -120,10 +120,10 @@ jobs:
       
         - name: Terraform Init
           run: |
-            cd ${{ github.workspace }}/dev 
+            cd dev/ 
             terraform init
           
         - name: Terraform Validate
           run: |
-            cd ${{ github.workspace }}/dev
+            cd dev/
             terraform validate
