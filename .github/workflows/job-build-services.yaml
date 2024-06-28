@@ -91,34 +91,38 @@ jobs:
         if: inputs.directory == 'iac'
         defaults:
           run:
-            working-directory: IAC/dev
-        runs-on: ubuntu-latest
-        env:
+            working-directory: IAC/
+        env: 
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           ARM_TENANT_ID:  ${{ secrets.AZURE_TENANT_ID }}
           ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
 
         steps:
-          - name: checkout
-            uses: actions/checkout@v4
+        - name: checkout
+          uses: actions/checkout@v4
 
-          - name: Azure login
-            uses: azure/login@v2
-            with:
-              client-id: ${{ secrets.AZURE_CLIENT_ID }}
-              tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-              subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        - name: Azure login
+          uses: azure/login@v2
+          with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-          - name: Check if storage account exists
-            run: |
-              az storage account show -g tripbuddies-rg -n tripbuddies
+        - name: Check if storage account exists
+          run: |
+            chmod +x deploy-storage-account.sh
+            ./deploy-storage-account.sh
+      
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v2.0.3
+      
+        - name: Terraform Init
+          run: |
+            cd ${{ github.workspace }}/dev 
+            terraform init
           
-          - name: Setup Terraform
-            uses: hashicorp/setup-terraform@v2.0.3
-          
-          - name: Terraform Init
-            run: terraform init
-          
-          - name: Terraform Validate
-            run: terraform validate
+        - name: Terraform Validate
+          run: |
+            cd ${{ github.workspace }}/dev
+            terraform validate
