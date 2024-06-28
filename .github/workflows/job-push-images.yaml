@@ -41,9 +41,9 @@ jobs:
       - name: Build and Push   
         run: |
             cd ${{ github.workspace }}/tripbuddies-cms
-            docker build -t tripbuddies.azurecr.io/tripbuddies-cms:$(date +'%Y.%m.%d') .
+            docker build -t tripbuddies.azurecr.io/tripbuddies-cms:$(date +'%Y.%m.%d') -f Dockerfile.prod .
             docker push tripbuddies.azurecr.io/tripbuddies-cms:$(date +'%Y.%m.%d')
-            docker build -t tripbuddies.azurecr.io/tripbuddies-cms:latest .
+            docker build -t tripbuddies.azurecr.io/tripbuddies-cms:latest -f Dockerfile.prod .
             docker push tripbuddies.azurecr.io/tripbuddies-cms:latest
             
   build-java-images:
