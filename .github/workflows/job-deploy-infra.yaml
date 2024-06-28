@@ -50,27 +50,27 @@ jobs:
       
       - name: Terraform Init
         run: |
-          cd ${{ github.workspace }}/dev 
+          cd dev/ 
           terraform init
 
       - name: Terraform Format
         run: |
-          cd ${{ github.workspace }}/dev
+          cd dev/
           terraform fmt
 
       - name: Terraform Plan
         run: |
-          cd ${{ github.workspace }}/dev
+          cd dev/
           terraform plan 
       
       - name: Terraform apply
         if: ${{ inputs.TFAction == 'apply'}} 
         run: |
-          cd ${{ github.workspace }}/dev
+          cd dev/
           terraform apply -auto-approve
 
       - name: Terraform destroy
         if: ${{ inputs.TFAction == 'destroy'}} 
         run : |
-          cd ${{ github.workspace }}/dev
+          cd dev/
           terraform destroy -auto-approve
