@@ -58,6 +58,7 @@ jobs:
 
       - name: Build and Push   
         run: |
+            cd ${{ github.workspace }}/spring-backend/${{ matrix.module }}
             docker build -t tripbuddies.azurecr.io/${{ matrix.module }}:$(date +'%Y.%m.%d') .
             docker push tripbuddies.azurecr.io/${{ matrix.module }}:$(date +'%Y.%m.%d')
             docker build -t tripbuddies.azurecr.io/${{ matrix.module }}:latest .
