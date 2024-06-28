@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: spring-backend
+        working-directory: spring-backend/
 
     strategy:
       matrix:
@@ -27,7 +27,7 @@ jobs:
       
       - name: build springboot project
         run: |
-          cd ${{ github.workspace }}/${{ matrix.module }}
+          cd ${{ github.workspace }}/spring-backend/${{ matrix.module }}
           mvn clean install -DskipTests
 
       - name: Azure login
