@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: IAC/dev
+        working-directory: IAC/
     env: 
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -42,25 +42,35 @@ jobs:
 
       - name: Check if storage account exists
         run: |
-          az storage account show -g tripbuddies-rg -n tripbuddies
+          chmod +x deploy-storage-account.sh
+          ./deploy-storage-account.sh
       
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
       
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd ${{ github.workspace }}/dev 
+          terraform init
 
       - name: Terraform Format
-        run: terraform fmt
+        run: |
+          cd ${{ github.workspace }}/dev
+          terraform fmt
 
       - name: Terraform Plan
-        run: terraform plan 
+        run: |
+          cd ${{ github.workspace }}/dev
+          terraform plan 
       
       - name: Terraform apply
         if: ${{ inputs.TFAction == 'apply'}} 
-        run: terraform apply -auto-approve
+        run: |
+          cd ${{ github.workspace }}/dev
+          terraform apply -auto-approve
 
       - name: Terraform destroy
         if: ${{ inputs.TFAction == 'destroy'}} 
-        run : terraform destroy -auto-approve
-
+        run : |
+          cd ${{ github.workspace }}/dev
+          terraform destroy -auto-approve
