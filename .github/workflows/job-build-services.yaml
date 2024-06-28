@@ -89,6 +89,7 @@ jobs:
         
     validate-iac:
         if: inputs.directory == 'iac'
+        runs-on: ubuntu-latest
         defaults:
           run:
             working-directory: IAC/
