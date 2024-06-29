@@ -41,7 +41,7 @@ jobs:
     
     - name: Replace tokens
       run: |
-        sed -i "s|__ADMIN_JWT_SECRET__|${{ secrets.ADMIN_JWT_SECRET }}/g" k8s/configmap.yaml
+        sed -i "s|__ADMIN_JWT_SECRET__|${{ secrets.ADMIN_JWT_SECRET }}|g" k8s/configmap.yaml
         sed -i "s|__API_TOKEN_SALT__|${{ secrets.API_TOKEN_SALT }}|g" k8s/configmap.yaml
         sed -i "s|__APP_KEYS__|${{ secrets.APP_KEYS }}|g" k8s/configmap.yaml
         sed -i "s|__DATABASE_HOST__|${{ secrets.DATABASE_HOST }}|g" k8s/configmap.yaml
