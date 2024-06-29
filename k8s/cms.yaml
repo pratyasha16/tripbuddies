@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eureka-server
+  name: strapi-cms
   labels: 
-    app: eureka-server
-    component: backend
+    app: strapi-cms
+    component: cms
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eureka-server
+      app: strapi-cms
   template:
     metadata:
       labels:
-        app: eureka-server
+        app: strapi-cms
     spec:
       containers:
-      - name: eureka-server
+      - name: strapi
         image: tripbuddies.azurecr.io/tripbuddies-cms:latest
         ports:
-        - containerPort: 8761
+        - containerPort: 1337
         envFrom:
         - configMapRef:
             name: tripbuddies-cm
