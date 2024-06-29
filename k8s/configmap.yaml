@@ -13,7 +13,7 @@ data:
   DATABASE_PORT: "5432"
   DATABASE_SSL: "true"
   DATABASE_USERNAME: tripbuddies
-  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:80/eureka
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server-svc:80/eureka
   HOST: 0.0.0.0
   JWT_SECRET: __JWT_SECRET__
   PORT: "1337"
