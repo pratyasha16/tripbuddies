@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: account-service
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: "TCP"
     port: 80 
@@ -20,7 +20,7 @@ metadata:
 spec:
   selector:
     app: checkout-service
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: "TCP"
     port: 80 
@@ -35,7 +35,7 @@ metadata:
 spec:
   selector:
     app: identity-service
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: "TCP"
     port: 80 
@@ -50,7 +50,7 @@ metadata:
 spec:
   selector:
     app: trip-service
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: "TCP"
     port: 80 
@@ -65,7 +65,7 @@ metadata:
 spec:
   selector:
     app: gateway-service
-  type: NodePort
+  type: LoadBalancer
   ports:
   - protocol: "TCP"
     port: 80 
@@ -80,7 +80,7 @@ metadata:
 spec:
   selector:
     app: eureka-server
-  type: NodePort
+  type: LoadBalancer
   ports:
   - protocol: "TCP"
     port: 80 
