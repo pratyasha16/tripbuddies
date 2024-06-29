@@ -19,3 +19,8 @@ jobs:
     uses: ./.github/workflows/job-push-images.yaml
     secrets: inherit
     needs: [deploy-infra]
+
+  deploy-k8s: 
+    uses: ./.github/workflows/job-deploy-k8s.yaml
+    secrets: inherit
+    needs: [push-images]

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tripbuddies-cm
+data:
+  ADMIN_JWT_SECRET: __ADMIN_JWT_SECRET__
+  API_TOKEN_SALT: __API_TOKEN_SALT__
+  APP_KEYS: __APP_KEYS__
+  DATABASE_CLIENT: postgres
+  DATABASE_HOST: __DATABASE_HOST__
+  DATABASE_NAME: tripbuddies
+  DATABASE_PASSWORD: __DATABASE_PASSWORD__
+  DATABASE_PORT: "5432"
+  DATABASE_SSL: "true"
+  DATABASE_USERNAME: tripbuddies
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:80/eureka
+  HOST: 0.0.0.0
+  JWT_SECRET: __JWT_SECRET__
+  PORT: "1337"
+  SERVER_PORT: "8080"
+  TRANSFER_TOKEN_SALT: __TRANSFER_TOKEN_SALT__
+  ACCOUNT_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
+  CHECKOUT_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
+  IDENTITY_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/user_credentials
+  TRIP_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip

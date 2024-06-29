@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-server
+  labels: 
+    app: eureka-server
+    component: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-server
+  template:
+    metadata:
+      labels:
+        app: eureka-server
+    spec:
+      containers:
+      - name: eureka-server
+        image: tripbuddies.azurecr.io/tripbuddies-cms:latest
+        ports:
+        - containerPort: 8761
+        envFrom:
+        - configMapRef:
+            name: tripbuddies-cm
