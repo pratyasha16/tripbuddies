@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktripbuddies_cms=self.webpackChunktripbuddies_cms||[]).push([[719],{20719:e=>{e.exports=JSON.parse('{"input.search.placeholder":"Suche einen Ort","input.error.required":"Bitte einen Standort w\xE4hlen","input.button.reset":"Zur\xFCcksetzen"}')}}]);

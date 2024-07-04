@@ -40,8 +40,8 @@
     "Category": {
       "type": "enumeration",
       "enum": [
-        "bike",
-        "backpack"
+        "Bike",
+        "Backpack"
       ],
       "required": true
     },
@@ -50,6 +50,95 @@
       "type": "component",
       "repeatable": true,
       "component": "regusers.registeredusers"
+    },
+    "duration": {
+      "type": "integer"
+    },
+    "cost": {
+      "type": "integer",
+      "required": true
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chhattisgarh",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jharkhand",
+        "Karnataka",
+        "Kerala",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttar Pradesh",
+        "Uttarakhand",
+        "West Bengal"
+      ]
+    },
+    "territories_ifNotState": {
+      "type": "enumeration",
+      "enum": [
+        "Andaman and Nicobar Islands",
+        "Chandigarh",
+        "Dadra and Nagar Haveli and Daman and Diu",
+        "Lakshadweep",
+        "Delhi",
+        "Puducherry",
+        "Ladakh",
+        "Jammu and Kashmir"
+      ]
+    },
+    "Included": {
+      "type": "customField",
+      "options": [
+        "Breakfast",
+        "Dinner",
+        "Pick up and drop",
+        "Parking",
+        "driver’s Bata",
+        "road tax & fuel charges",
+        "A/C Cab for all transfers and sightseeing exactly as per the itinerary",
+        "Entry Fees to Monuments and Palaces"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "startdate": {
+      "type": "datetime"
+    },
+    "Itinerary": {
+      "type": "blocks"
+    },
+    "enddate": {
+      "type": "datetime",
+      "unique": true
+    },
+    "activities": {
+      "type": "customField",
+      "options": [
+        "Cruises",
+        "Paragliding",
+        "River rafting",
+        "Scuba diving",
+        "Trekking",
+        ""
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

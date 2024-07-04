@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@amicaldo/strapi-google-maps": "^1.1.5",
     "@strapi/plugin-cloud": "4.24.4",
     "@strapi/plugin-i18n": "4.24.4",
     "@strapi/plugin-users-permissions": "4.24.4",
@@ -19,7 +20,9 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
+    "strapi-location-field-plugin": "^1.2.3",
     "strapi-plugin-meilisearch": "^0.12.0",
+    "strapi-plugin-multi-select": "^1.2.3",
     "styled-components": "5.3.3"
   },
   "author": {

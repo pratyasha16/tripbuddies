@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "companions",
+  "info": {
+    "singularName": "companion",
+    "pluralName": "companions",
+    "displayName": "Companions",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "FoodChoice": {
+      "type": "enumeration",
+      "enum": [
+        "vegetarian",
+        "non-vegetarian"
+      ]
+    },
+    "Age": {
+      "type": "integer"
+    },
+    "Mobile": {
+      "type": "biginteger",
+      "min": "10"
+    }
+  }
+}

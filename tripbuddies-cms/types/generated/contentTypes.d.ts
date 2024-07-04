@@ -590,6 +590,46 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginGoogleMapsConfig extends Schema.SingleType {
+  collectionName: 'google_maps_configs';
+  info: {
+    singularName: 'config';
+    pluralName: 'configs';
+    displayName: 'Google Maps Config';
+  };
+  options: {
+    populateCreatorFields: false;
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    googleMapsKey: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<''>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::google-maps.config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::google-maps.config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginI18NLocale extends Schema.CollectionType {
   collectionName: 'i18n_locale';
   info: {
@@ -827,6 +867,46 @@ export interface ApiAgencyAgency extends Schema.CollectionType {
   };
 }
 
+export interface ApiCompanionCompanion extends Schema.CollectionType {
+  collectionName: 'companions';
+  info: {
+    singularName: 'companion';
+    pluralName: 'companions';
+    displayName: 'Companions';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    FoodChoice: Attribute.Enumeration<['vegetarian', 'non-vegetarian']>;
+    Age: Attribute.Integer;
+    Mobile: Attribute.BigInteger &
+      Attribute.SetMinMax<
+        {
+          min: '10';
+        },
+        string
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::companion.companion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::companion.companion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTripTrip extends Schema.CollectionType {
   collectionName: 'trips';
   info: {
@@ -847,8 +927,83 @@ export interface ApiTripTrip extends Schema.CollectionType {
       'manyToOne',
       'api::agency.agency'
     >;
-    Category: Attribute.Enumeration<['bike', 'backpack']> & Attribute.Required;
+    Category: Attribute.Enumeration<['Bike', 'Backpack']> & Attribute.Required;
     RegisteredUsers: Attribute.Component<'regusers.registeredusers', true>;
+    duration: Attribute.Integer;
+    cost: Attribute.Integer & Attribute.Required;
+    state: Attribute.Enumeration<
+      [
+        'Andhra Pradesh',
+        'Arunachal Pradesh',
+        'Assam',
+        'Bihar',
+        'Chhattisgarh',
+        'Goa',
+        'Gujarat',
+        'Haryana',
+        'Himachal Pradesh',
+        'Jharkhand',
+        'Karnataka',
+        'Kerala',
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Manipur',
+        'Meghalaya',
+        'Mizoram',
+        'Nagaland',
+        'Odisha',
+        'Punjab',
+        'Rajasthan',
+        'Sikkim',
+        'Tamil Nadu',
+        'Telangana',
+        'Tripura',
+        'Uttar Pradesh',
+        'Uttarakhand',
+        'West Bengal'
+      ]
+    >;
+    territories_ifNotState: Attribute.Enumeration<
+      [
+        'Andaman and Nicobar Islands',
+        'Chandigarh',
+        'Dadra and Nagar Haveli and Daman and Diu',
+        'Lakshadweep',
+        'Delhi',
+        'Puducherry',
+        'Ladakh',
+        'Jammu and Kashmir'
+      ]
+    >;
+    Included: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Breakfast',
+          'Dinner',
+          'Pick up and drop',
+          'Parking',
+          'driver\u2019s Bata',
+          'road tax & fuel charges',
+          'A/C Cab for all transfers and sightseeing exactly as per the itinerary',
+          'Entry Fees to Monuments and Palaces'
+        ]
+      >;
+    startdate: Attribute.DateTime;
+    Itinerary: Attribute.Blocks;
+    enddate: Attribute.DateTime & Attribute.Unique;
+    activities: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Cruises',
+          'Paragliding',
+          'River rafting',
+          'Scuba diving',
+          'Trekking',
+          ''
+        ]
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -873,11 +1028,13 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::agency.agency': ApiAgencyAgency;
+      'api::companion.companion': ApiCompanionCompanion;
       'api::trip.trip': ApiTripTrip;
     }
   }

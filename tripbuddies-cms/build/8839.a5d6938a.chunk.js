@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktripbuddies_cms=self.webpackChunktripbuddies_cms||[]).push([[8839],{58839:e=>{e.exports=JSON.parse('{"input.search.placeholder":"Search for a place","input.error.required":"You must pick a location","input.button.reset":"Reset"}')}}]);
