@@ -75,8 +75,8 @@ jobs:
 
       - name: Build and Push   
         run: |
-            cd ${{ github.workspace }}/stripe-backend
-            docker build -t tripbuddies.azurecr.io/stripe:$(date +'%Y.%m.%d') -f Dockerfile .
+            # cd ${{ github.workspace }}/stripe-backend
+            docker build -t tripbuddies.azurecr.io/stripe:$(date +'%Y.%m.%d') -f stripe-backend/Dockerfile .
             docker push tripbuddies.azurecr.io/stripe:$(date +'%Y.%m.%d')
-            docker build -t tripbuddies.azurecr.io/stripe:latest -f Dockerfile .
+            docker build -t tripbuddies.azurecr.io/stripe:latest -f stripe-backend/Dockerfile .
             docker push tripbuddies.azurecr.io/stripe:latest
