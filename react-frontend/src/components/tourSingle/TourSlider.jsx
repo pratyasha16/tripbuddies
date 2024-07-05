@@ -52,7 +52,7 @@ export default function TourSlider(tourData) {
   // }, [tourData]);
 
 
-console.log(recommendTrip)
+// console.log(recommendTrip)
 
 // {recommendTrip.map((elm, i) => (
 

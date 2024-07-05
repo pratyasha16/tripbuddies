@@ -77,12 +77,17 @@ export default function Profile() {
       // }
       const response = await axios.post(`${__STRAPI_CLIENT_URL__}`+'/api/companions', {
         data: {
-            Name: name,
-            Age: age,
-            Mobile: mobile,
-            FoodChoice: foodPreference,
-            Photourl: imageUrl,
-            Gender: gender
+            // Name: name,
+            // Age: age,
+            // Mobile: mobile,
+            // FoodChoice: foodPreference,
+            // Photourl: imageUrl,
+            // Gender: gender
+            Name: "name",
+            Age: 22,
+            Mobile: 222,
+            FoodChoice: "Vegetarian",
+            Photourl: "imageUrl",
         }
     });
 

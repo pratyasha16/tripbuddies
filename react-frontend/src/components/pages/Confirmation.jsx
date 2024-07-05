@@ -5,10 +5,10 @@ import '../../styles/style.css';
 const Confirmation = (personalInfo) => {
     const navigate = useNavigate();
     //const tripTitle = localStorage.getItem("tripTitle");
-    const tripTitle = "goa trip"
-    const date = "27/07/2021";
-    const tripDuration = "2-3 days"
-    const tripCost = "300"
+    const tripTitle = "goa splash"
+    const date = "19/07/2024";
+    const tripDuration = "3 days"
+    const tripCost = "18000"
     const [members, setMembers] = useState('');
     const navigateTo = useNavigate();
 

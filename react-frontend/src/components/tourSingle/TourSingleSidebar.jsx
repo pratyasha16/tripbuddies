@@ -42,7 +42,7 @@ export default function TourSingleSidebar(tourData) {
   // var startDateString
   // const timeString = dateObject.toLocaleTimeString();
 
-  console.log(extractedStartDate+"   "+extractedStartTime)
+  // console.log(extractedStartDate+"   "+extractedStartTime)
   // console.log(tourData.tourData.startdate)
 
   return (
@@ -284,7 +284,7 @@ export default function TourSingleSidebar(tourData) {
           ).toFixed(2)}
         </div>
       </div>
-      <Link to="/booking-pages">
+      <Link to="/personal-details">
       <button className="button -md -dark-1 col-12 bg-accent-1 text-white mt-20">
      <b> Join Now</b> 
         <i className="icon-arrow-top-right ml-10"></i>

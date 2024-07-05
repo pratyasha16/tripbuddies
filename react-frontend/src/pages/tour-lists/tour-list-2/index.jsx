@@ -44,9 +44,9 @@ export default function TourListPage2() {
           },
         });        
         setTourData(response.data.data);
-        console.log(response.data.data);
-        console.log(queryParams.location);
-        console.log(queryParams.tourType);
+        // console.log(response.data.data);
+        // console.log(queryParams.location);
+        // console.log(queryParams.tourType);
 
       } catch (error) {
         console.error("Error fetching data from Strapi:", error);
