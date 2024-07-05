@@ -1,4 +1,3 @@
-@import "../../public/css/style.css";
 body {
     font-family: Arial, sans-serif;
 }
@@ -33,8 +32,4 @@ body {
 
 .booking-form button:hover, .payment-page button:hover {
     background-color: #218838;
-}
-.error {
-    color: red;
-    font-size: 0.875em;
 }

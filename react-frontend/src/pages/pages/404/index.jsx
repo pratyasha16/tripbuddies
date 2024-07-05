@@ -1,6 +1,6 @@
 import FooterFour from "@/components/layout/footers/FooterFour";
 import Header3 from "@/components/layout/header/Header3";
-
+import { useNavigate } from 'react-router-dom';
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
@@ -9,6 +9,11 @@ const metadata = {
 };
 
 export default function NotFoundPage() {
+  const navigateTo = useNavigate();
+  const handleSubmit = (values) => {
+    values.preventDefault();
+    navigateTo('/home');
+  };
   return (
     <>
       <MetaComponent meta={metadata} />
@@ -34,7 +39,7 @@ export default function NotFoundPage() {
                     again or use the go to.
                   </p>
 
-                  <button className="button -md -dark-1 bg-accent-1 text-white mt-25" >
+                  <button className="button -md -dark-1 bg-accent-1 text-white mt-25" type="submit" onClick={handleSubmit}>
                   Go back to homepage 
                     <i className="icon-arrow-top-right ml-10"></i>
                   </button>
