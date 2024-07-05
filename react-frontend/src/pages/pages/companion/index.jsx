@@ -3,6 +3,7 @@ import Header3 from "@/components/layout/header/Header3";
 import Calender from "@/components/common/dropdownSearch/Calender";
 import Location from "@/components/common/dropdownSearch/Location";
 import TourType from "@/components/common/dropdownSearch/TourType";
+import axios from "axios";
 
 import { useEffect, useState, useRef } from "react";
 
@@ -18,6 +19,9 @@ export default function MyCompanion() {
   const [location, setLocation] = useState("");
   const [calender, setCalender] = useState("");
   const [tourType, setTourType] = useState("");
+  const [companionData, setCompanionData] = useState([]);
+
+
   useEffect(() => {
     setCurrentActiveDD("");
   }, [location, calender, tourType, setCurrentActiveDD]);
@@ -39,6 +43,30 @@ export default function MyCompanion() {
       document.removeEventListener("click", handleClick);
     };
   }, []);
+
+
+  // useEffect(() => {
+  //   const fetchCompanions = async () => {
+  //     try {
+  //       const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*', {
+  //         params: {
+  //           filters: {
+  //             $and: [
+  //               { activities: { $containsi: activity.activity} },
+  //             ],
+  //           },
+  //         },
+  //       });        
+  //       setCompanionData(response.data.data);
+
+  //     } catch (error) {
+  //       console.error("Error fetching data from Strapi:", error);
+  //     }
+  //   };
+  
+  //   fetchComponions();
+  // }, []);
+
 
   return (
     <>
@@ -67,7 +95,7 @@ export default function MyCompanion() {
 
               </div>
             </div>
-            <div className="pageHeader__search">
+            {/* <div className="pageHeader__search">
               <div className="searchForm -type-1 shadow-1">
                 <div ref={dropDownContainer} className="searchForm__form">
                   <div className="searchFormItem js-select-control js-form-dd">
@@ -150,7 +178,7 @@ export default function MyCompanion() {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div> 
         </section> 
 
@@ -160,6 +188,7 @@ export default function MyCompanion() {
               <h1 class="pageHeader__title">Find your Companion's</h1>
             </div></div>
             <div className="row y-gap-30 pt-30">
+              {/* { {speedFeatures.map((elm, i) => ())}} */}
               <div className="col-4">
                 <div className="tourCard -type-2">
                   <div className="user-h">
@@ -175,7 +204,7 @@ export default function MyCompanion() {
                   </div>
                 </div>
               </div>
-              <div className="col-4">
+              {/* <div className="col-4">
                 <div className="tourCard -type-2">
                   <div className="user-h">
                     <img src="/img/user-img-2.jpg" alt="image" />
@@ -234,7 +263,7 @@ export default function MyCompanion() {
                     <button class="button -outline-accent-1  pl-10 pr-10 pt-5 pb-5"> Connect</button>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

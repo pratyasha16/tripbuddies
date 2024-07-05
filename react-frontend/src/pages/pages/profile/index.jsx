@@ -19,6 +19,8 @@ export default function Profile() {
     const [age, setAge] = useState('');
     const [mobile, setMobile] = useState('');
     const [gender, setGender] = useState('');
+    const [foodPreference, setFoodPreference] = useState('');
+
     const [foodChoice, setFoodChoice] = useState('');
 
   const [image1, setImage1] = useState("");
@@ -48,7 +50,7 @@ export default function Profile() {
   // useEffect(() => {
     const postCompanion = async (e) => {
       e.preventDefault();
-      console.log(gender,name,age,mobile)
+      console.log(gender,name,age,mobile,foodPreference)
 
         if (!image1) return;
 
@@ -75,15 +77,16 @@ export default function Profile() {
       // }
       const response = await axios.post(`${__STRAPI_CLIENT_URL__}`+'/api/companions', {
         data: {
-            Name: "kham",
-            Age: 22,
-            Mobile: 3456565456,
-            FoodChoice: "vegetarian",
-            Photourl: "url"
+            Name: name,
+            Age: age,
+            Mobile: mobile,
+            FoodChoice: foodPreference,
+            Photourl: imageUrl,
+            Gender: gender
         }
     });
 
-    console.log(gender,name,age,mobile)
+    console.log(gender,name,age,mobile,foodPreference)
 
     };
 
@@ -154,7 +157,7 @@ required />
                           <label className="lh-1 text-16 text-light-1">Your likes</label>
                         </div>
                       </div> */}
-                      <div className="col-md-6">
+                      {/* <div className="col-md-6">
                         <div className="row">
                           <label className="text-16 lh-1 fw-400 text-dark-1 pb-15">
                             Gender
@@ -187,8 +190,28 @@ required />
                       </div>
 
                         </div>
-                      </div>
+                      </div> */}
                      
+
+                      <div>
+                {/* <label className="lh-1 text-16 text-light-1">Gender</label> */}
+                <select value={gender} onChange={(e) => setGender(e.target.value)}  required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+                      <div>
+                {/* <label className="lh-1 text-16 text-light-1">Food Preference</label> */}
+                <select value={foodPreference} onChange={(e) => setFoodPreference(e.target.value)}  required>
+                    <option value="">Select a food preference</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Non-Vegetarian">Non-Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
                       {/* <div className="col-md-6">
                         <div className="row">
                           <label className="text-16 lh-1 fw-400 text-dark-1 pb-15">
