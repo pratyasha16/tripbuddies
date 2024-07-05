@@ -32,6 +32,7 @@
   "@stripe/react-stripe-js": "^2.7.1",
   "@stripe/stripe-js": "^3.5.0",
   "formik": "^2.4.6",
+    "cors": "^2.8.5",
   "yup": "^1.4.0"
  
   },
