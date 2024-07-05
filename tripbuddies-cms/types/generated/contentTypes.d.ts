@@ -844,11 +844,6 @@ export interface ApiAgencyAgency extends Schema.CollectionType {
     Email: Attribute.Email;
     Documents: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     Mobile: Attribute.BigInteger & Attribute.Required;
-    trips: Attribute.Relation<
-      'api::agency.agency',
-      'oneToMany',
-      'api::trip.trip'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -920,18 +915,14 @@ export interface ApiTripTrip extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    title: Attribute.String;
     description: Attribute.Blocks;
     tripimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    agency: Attribute.Relation<
-      'api::trip.trip',
-      'manyToOne',
-      'api::agency.agency'
+    category: Attribute.Enumeration<
+      ['Bike', 'Treks', 'Hiking', 'Bagpackingtrips', 'Beachtours']
     >;
-    Category: Attribute.Enumeration<['Bike', 'Backpack']> & Attribute.Required;
-    RegisteredUsers: Attribute.Component<'regusers.registeredusers', true>;
     duration: Attribute.Integer;
-    cost: Attribute.Integer & Attribute.Required;
+    cost: Attribute.BigInteger;
     state: Attribute.Enumeration<
       [
         'Andhra Pradesh',
@@ -964,47 +955,33 @@ export interface ApiTripTrip extends Schema.CollectionType {
         'West Bengal'
       ]
     >;
-    territories_ifNotState: Attribute.Enumeration<
-      [
-        'Andaman and Nicobar Islands',
-        'Chandigarh',
-        'Dadra and Nagar Haveli and Daman and Diu',
-        'Lakshadweep',
-        'Delhi',
-        'Puducherry',
-        'Ladakh',
-        'Jammu and Kashmir'
-      ]
-    >;
-    Included: Attribute.JSON &
+    included: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
         [
-          'Breakfast',
-          'Dinner',
-          'Pick up and drop',
-          'Parking',
-          'driver\u2019s Bata',
-          'road tax & fuel charges',
-          'A/C Cab for all transfers and sightseeing exactly as per the itinerary',
-          'Entry Fees to Monuments and Palaces'
+          'Flight bookings',
+          'Airport transfers',
+          'Culinary tours',
+          'Travel SIM cards and Wi-Fi hotspots',
+          'Wellness and spa services',
+          ''
         ]
       >;
     startdate: Attribute.DateTime;
-    queries: Attribute.Blocks;
-    enddate: Attribute.DateTime & Attribute.Unique;
+    enddate: Attribute.DateTime;
     activities: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
         [
-          'Cruises',
-          'Paragliding',
-          'River rafting',
-          'Scuba diving',
-          'Trekking',
-          ''
+          'Backpacking',
+          'Hiking',
+          'Scubadiving',
+          'Skydiving',
+          'Rafting',
+          'Ziplining'
         ]
       >;
+    queries: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

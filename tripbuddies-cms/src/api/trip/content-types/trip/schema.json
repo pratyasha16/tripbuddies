@@ -13,9 +13,7 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "required": true,
-      "unique": true
+      "type": "string"
     },
     "description": {
       "type": "blocks"
@@ -31,32 +29,21 @@
         "audios"
       ]
     },
-    "agency": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::agency.agency",
-      "inversedBy": "trips"
-    },
-    "Category": {
+    "category": {
       "type": "enumeration",
       "enum": [
         "Bike",
-        "Backpack"
-      ],
-      "required": true
-    },
-    "RegisteredUsers": {
-      "displayName": "registeredusers",
-      "type": "component",
-      "repeatable": true,
-      "component": "regusers.registeredusers"
+        "Treks",
+        "Hiking",
+        "Bagpackingtrips",
+        "Beachtours"
+      ]
     },
     "duration": {
       "type": "integer"
     },
     "cost": {
-      "type": "integer",
-      "required": true
+      "type": "biginteger"
     },
     "state": {
       "type": "enumeration",
@@ -91,54 +78,38 @@
         "West Bengal"
       ]
     },
-    "territories_ifNotState": {
-      "type": "enumeration",
-      "enum": [
-        "Andaman and Nicobar Islands",
-        "Chandigarh",
-        "Dadra and Nagar Haveli and Daman and Diu",
-        "Lakshadweep",
-        "Delhi",
-        "Puducherry",
-        "Ladakh",
-        "Jammu and Kashmir"
-      ]
-    },
-    "Included": {
+    "included": {
       "type": "customField",
       "options": [
-        "Breakfast",
-        "Dinner",
-        "Pick up and drop",
-        "Parking",
-        "driver’s Bata",
-        "road tax & fuel charges",
-        "A/C Cab for all transfers and sightseeing exactly as per the itinerary",
-        "Entry Fees to Monuments and Palaces"
+        "Flight bookings",
+        "Airport transfers",
+        "Culinary tours",
+        "Travel SIM cards and Wi-Fi hotspots",
+        "Wellness and spa services",
+        ""
       ],
       "customField": "plugin::multi-select.multi-select"
     },
     "startdate": {
       "type": "datetime"
     },
-    "queries": {
-      "type": "blocks"
-    },
     "enddate": {
-      "type": "datetime",
-      "unique": true
+      "type": "datetime"
     },
     "activities": {
       "type": "customField",
       "options": [
-        "Cruises",
-        "Paragliding",
-        "River rafting",
-        "Scuba diving",
-        "Trekking",
-        ""
+        "Backpacking",
+        "Hiking",
+        "Scubadiving",
+        "Skydiving",
+        "Rafting",
+        "Ziplining"
       ],
       "customField": "plugin::multi-select.multi-select"
+    },
+    "queries": {
+      "type": "blocks"
     }
   }
 }

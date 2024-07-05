@@ -33,12 +33,6 @@
     "Mobile": {
       "type": "biginteger",
       "required": true
-    },
-    "trips": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::trip.trip",
-      "mappedBy": "agency"
     }
   }
 }
