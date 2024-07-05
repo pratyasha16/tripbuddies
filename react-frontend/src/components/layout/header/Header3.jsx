@@ -6,9 +6,8 @@ export default function Header3() {
 
   const pageNavigate = (pageName) => {
     navigate(pageName);
-  };
+  }; 
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [addClass, setAddClass] = useState(false);
   const token = localStorage.getItem('token');
 
@@ -46,7 +45,8 @@ export default function Header3() {
               <img src="/img/logo-b.svg" alt="logo icon" />
             </Link>
           </div>
-
+       
+          
           <div className="headerMobile__right">
             <button
               onClick={() => pageNavigate("/tour-list-1")}
@@ -62,22 +62,41 @@ export default function Header3() {
           </div>
 
           <div className="header__right">
-          { token ? (
-            
-            <Link to="/" onClick={handleLogout} className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-30" >
-              Log Out
-            </Link>
 
-              ) : ( 
-                <>
+            {token ? (
+              <> 
+             <Link to="https://strapi.io/" target="_blank" className="ml-10 icon-center">
+              <i class="text-15 icon-plus mb-10"></i>
+                Create an Trip
+            </Link>
+            <Link to="/db-booking" className="ml-40 icon-center"> 
+              <i class="text-15 icon-pin mb-10"></i>
+                Manage Trip
+            </Link>
+            <Link to="/profile" className="ml-40 icon-center">
+              <i class="text-15 mb-10"> <img className="h-18" src="/img/companion.svg" alt="companion icon" /> </i> 
+              Find my Companion
+            </Link>
+            <Link to="/db-listing" className="ml-40 icon-center">
+               <i class="text-15 icon-heart mb-10"></i>
+                Wishlist
+            </Link>
+              <Link to="/" onClick={handleLogout} className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-60" >
+                Log Out
+              </Link>
+            </>
+            ) : (
+              <>
                 <Link to="/register" className="ml-30">
-                Create an Account
+                  Create an Account
                 </Link>
-    
-                <Link to="/login" className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-30" >
+
+                <Link to="/login" className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-60" >
                   Log in
                 </Link>
-                </>
+              </>
+
+              
             )}
           </div>
         </div>

@@ -48,6 +48,9 @@ jobs:
         sed -i "s|__DATABASE_PASSWORD__|${{ secrets.DATABASE_PASSWORD }}|g" k8s/configmap.yaml
         sed -i "s|__JWT_SECRET__|${{ secrets.JWT_SECRET }}|g" k8s/configmap.yaml
         sed -i "s|__TRANSFER_TOKEN_SALT__|${{ secrets.TRANSFER_TOKEN_SALT }}|g" k8s/configmap.yaml
+        sed -i "s|__STRIPE_SECRET_KEY__|${{ secrets.STRIPE_SECRET_KEY }}|g" k8s/configmap.yaml
+        sed -i "s|__STRIPE_WEBHOOK_SECRET__|${{ secrets.STRIPE_WEBHOOK_SECRET }}|g" k8s/configmap.yaml
+        sed -i "s|__FRONTEND_URL__|${{ vars.FRONTEND_URL }}|g" k8s/configmap.yaml
 
     - name: Deploys application
       uses: Azure/k8s-deploy@v4

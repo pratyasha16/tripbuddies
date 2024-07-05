@@ -25,7 +25,7 @@ export default function Favorites() {
             <h1 className="text-30">My Favorites</h1>
             <p className="">Lorem ipsum dolor sit amet, consectetur.</p>
 
-            <div className="rounded-12 bg-white shadow-2 px-40 pt-40 pb-30  mt-30 ">
+            <div className="rounded-12 bg-white shadow-2 px-30 pt-40 pb-30  mt-30 ">
               <div className="row y-gap-30">
                 {tourDataThree.slice(0, 8).map((elm, i) => (
                   <div key={i} className="col-xl-3 col-lg-4 col-md-6">
@@ -93,8 +93,8 @@ export default function Favorites() {
               </div>
             </div>
 
-            <div className="text-center pt-30">
-              © Copyright Valtech {new Date().getFullYear()}
+            <div className="text-center pt-80 pb-20">
+              © Copyright Trip Planner, Machathon-Valtech {new Date().getFullYear()} 
             </div>
           </div>
         </div>

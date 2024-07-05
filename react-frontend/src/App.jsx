@@ -12,16 +12,22 @@ import TourSinglePage1 from "./pages/tour-singles/tour-single-1";
 import BookingPage from "./pages/pages/booking-pages";
 import PersonalDetails from "./pages/pages/booking-pages/PersonalDetailsPage.jsx";
 import Confirmation from "./pages/pages/booking-pages/ConfirmationPage.jsx";
-import Payment from "./pages/pages/booking-pages/PaymentPage.jsx";
+// import Payment from "./pages/pages/booking-pages/PaymentPage.jsx";
 import DBMainPage from "./pages/dashboard/db-main";
 import DBBookingPage from "./pages/dashboard/db-booking";
-import DBListingPage from "./pages/dashboard/db-listing"; 
+import DBListingPage from "./pages/dashboard/db-listing";
 import DBFavoritesPage from "./pages/dashboard/db-favorites";
+// import PersonalDetails from './components/pages/PersonalDetails.jsx';
+import Payment from './components/pages/Payment.jsx';
+// import Confirmation from './components/pages/Confirmation';
+import Successful from "./components/pages/Succesful.jsx";
 import DestinationsPage from "./pages/pages/destinations";
 import LoginPage from "./pages/pages/login";
 import RegisterPage from "./pages/pages/register";
 import NotFoundPage from "./pages/pages/404";
-import Successful from "./components/pages/Succesful.jsx";
+import FindmyCompanion from "./pages/pages/companion"
+import CompanionProfile from "./pages/pages/profile"
+
 
 function App() {
   useEffect(() => {
@@ -38,16 +44,18 @@ function App() {
           <Route path="/">
             <Route index element={<HomePage1 />} />
             <Route path="/home" element={<HomePage4 />} />
-            <Route path="/tour-list-1" element={<TourListPage1 />} />
+            <Route path="/tour-list-1/:title" element={<TourListPage1 />} />
             <Route path="/tour-list-2" element={<TourListPage2 />} />
             <Route path="/tour-single-1/:id" element={<TourSinglePage1 />} />
             <Route path="/booking-pages" element={<BookingPage />} />
             <Route path="/db-main" element={<DBMainPage />} />
             <Route path="/db-booking" element={<DBBookingPage />} />
-            <Route path="/db-listing" element={<DBListingPage />} /> 
+            <Route path="/db-listing" element={<DBListingPage />} />
             <Route path="/db-favorites" element={<DBFavoritesPage />} />
-            <Route path="/destinations" element={<DestinationsPage />} />
+            <Route path="/destinations/:activity" element={<DestinationsPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/companion" element={<FindmyCompanion />} />
+            <Route path="/profile" element={<CompanionProfile />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/404" element={<NotFoundPage />} />
             <Route path="/*" element={<NotFoundPage />} />

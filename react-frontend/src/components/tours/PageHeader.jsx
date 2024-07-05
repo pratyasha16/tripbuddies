@@ -27,7 +27,7 @@ export default function PageHeader() {
         <div className="row pt-30">
           <div className="col-auto">
             <h1 className="pageHeader__title">
-              Explore all things to do in India
+              Trending Destinations Across India
             </h1>
           </div>
         </div>

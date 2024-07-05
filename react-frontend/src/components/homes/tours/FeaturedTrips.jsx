@@ -18,6 +18,7 @@ export default function FeaturedTrips() {
     } else {
       setFiltered(filterTour);
     }
+    
   }, [travelStyle]);
 
   const dropDownContainer = useRef();

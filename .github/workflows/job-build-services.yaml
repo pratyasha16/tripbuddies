@@ -8,7 +8,6 @@ on:
         required: true
         type: choice
         options:
-          - "springboot"
           - "react"
           - "iac"
   workflow_call:
@@ -22,25 +21,6 @@ permissions:
 
 
 jobs: 
-    validate-springboot: 
-        if: inputs.directory == 'springboot'
-        runs-on: ubuntu-latest
-
-        steps:
-        - name: checkout
-          uses: actions/checkout@v4
-        
-        - name: Set up JDK 17
-          uses: actions/setup-java@v4
-          with: 
-            java-version: '17'
-            distribution: 'temurin'
-
-        - name: build springboot project
-          run: |
-            cd ${{ github.workspace }}/spring-backend
-            mvn clean install -DskipTests
-
     validate-react: 
         if: inputs.directory == 'react'
         runs-on: ubuntu-latest

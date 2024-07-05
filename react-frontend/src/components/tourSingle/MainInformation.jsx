@@ -54,7 +54,7 @@ export default function MainInformation({ tourData }) {
               <div className="d-flex items-center">
                 <i className="icon-pin text-16 mr-5"></i>
                 {/* {tour?.location} */}
-                {"India, "+tourData.attributes.state}
+                {tourData.attributes.state+", India"}
               </div>
             </div>
 

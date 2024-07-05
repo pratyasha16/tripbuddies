@@ -7,6 +7,8 @@ dotenv.config(); // load env vars from .env
 export default defineConfig({
   define: {
     __STRIPE_CLIENT_URL__: `"${process.env.STRIPE_CLIENT_URL}"`,
+    __STRAPI_CLIENT_URL__: `"${process.env.STRAPI_CLIENT_URL}"`,
+
   },
   plugins: [react()],
   resolve: {

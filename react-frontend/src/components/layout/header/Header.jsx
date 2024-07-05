@@ -11,7 +11,7 @@ export default function Header3() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [addClass, setAddClass] = useState(false);
   const token = localStorage.getItem('token');
-  console.log("during reload",token)
+  console.log("during reload", token)
 
 
   // Add a class to the element when scrolled 50px
@@ -63,22 +63,22 @@ export default function Header3() {
           </div>
 
           <div className="header__right">
-            { token ? (
-            
-            <Link to="/" onClick={handleLogout} className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-30" >
-              Log Out
-            </Link>
+            {token ? (
 
-              ) : ( 
-                <>
+              <Link to="/" onClick={handleLogout} className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-30" >
+                Log Out
+              </Link>
+
+            ) : (
+              <>
                 <Link to="/register" className="ml-30">
-                Create an Account
+                  Create an Account
                 </Link>
-    
-                <Link to="/login" className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-30" >
+
+                <Link to="/login" className="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-60" >
                   Log in
                 </Link>
-                </>
+              </>
             )}
           </div>
         </div>

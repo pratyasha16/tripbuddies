@@ -20,10 +20,10 @@ export default function DBListing() {
           <Header setSideBarOpen={setSideBarOpen} />
 
           <div className="dashboard__content_content">
-            <h1 className="text-30">My Listings</h1>
-            <p className="">Lorem ipsum dolor sit amet, consectetur.</p>
+            <h1 className="text-30">My Wishlist</h1>
+            <p className="">Save time. Add your items and ideas in one convenient Trip.</p>
 
-            <div className="rounded-12 bg-white shadow-2 px-40 pt-40 pb-30 md:px-20 md:pt-20 md:pb-20 mt-30 md:mt-30">
+            <div className="rounded-12 bg-white shadow-2 px-30 pt-40 pb-30 md:px-20 md:pt-20 md:pb-20 mt-30 md:mt-30">
               <div className="row y-gap-30">
                 {tourData.slice(0, 6).map((elm, i) => (
                   <div key={i} className="col-lg-6">

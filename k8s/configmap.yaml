@@ -13,13 +13,11 @@ data:
   DATABASE_PORT: "5432"
   DATABASE_SSL: "true"
   DATABASE_USERNAME: tripbuddies
-  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server-svc:80/eureka
   HOST: 0.0.0.0
   JWT_SECRET: __JWT_SECRET__
   PORT: "1337"
   SERVER_PORT: "8080"
   TRANSFER_TOKEN_SALT: __TRANSFER_TOKEN_SALT__
-  ACCOUNT_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
-  CHECKOUT_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
-  IDENTITY_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/user_credentials
-  TRIP_SVC_CS: jdbc:postgresql://tripbuddies.postgres.database.azure.com:5432/trip
+  STRIPE_SECRET_KEY: __STRIPE_SECRET_KEY__
+  STRIPE_WEBHOOK_SECRET: __STRIPE_WEBHOOK_SECRET__
+  CLIENT_URL: __FRONTEND_URL__

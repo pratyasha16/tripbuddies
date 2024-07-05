@@ -1,11 +1,68 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { tourData } from "@/data/tours";
-
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 import Stars from "../common/Stars";
 import { Link } from "react-router-dom";
 
-export default function TourSlider() {
+export default function TourSlider(tourData) {
+  const [recommendTrip, setRecommendTrip] = useState(null); // Changed to null for better initial state handling
+
+ console.log(tourData)
+ useEffect(() => {
+  const fetchTours = async () => {
+    try {
+      const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*');
+      setRecommendTrip(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.error("Error fetching data from Strapi:", error);
+    }
+  };
+
+  fetchTours();
+}, []); 
+
+  
+  // useEffect(() => {
+  //   if (!tourData || !tourData.tourData || !tourData.tourData.attributes) {
+  //     console.log("tourData is not properly initialized or missing attributes");
+  //     return;
+  //   }
+
+  //   const fetchTours = async () => {
+  //     try {
+  //       console.log("hello from try")
+  //       const response = await axios.get('http://localhost:1337/api/trips?populate=*', {
+  //         params: {
+  //           filters: {
+  //             state: { $contains: tourData.tourData.attributes.state },
+  //           },
+  //         },
+  //       });
+  //       setRecommendTrip(response.data.data);
+  //       console.log("Data fetched successfully:", response.data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data from Strapi:", error);
+  //     }
+  //   };
+
+  //   fetchTours();
+  // }, [tourData]);
+
+
+console.log(recommendTrip)
+
+// {recommendTrip.map((elm, i) => (
+
+// console.log("http://localhost:1337"+elm.attributes.tripimage.data[0].attributes.url)
+// ))}
+
+  if (!tourData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <section className="layout-pt-xl layout-pb-xl bg-accent-1-05">
       <div className="container">
@@ -51,7 +108,7 @@ export default function TourSlider() {
                   },
                 }}
               >
-                {tourData.map((elm, i) => (
+                {recommendTrip.map((elm, i) => (
                   <SwiperSlide key={i}>
                     <Link
                       to={`/tour-single-1/${elm.id}`}
@@ -60,8 +117,8 @@ export default function TourSlider() {
                       <div className="tourCard__header">
                         <div className="tourCard__image ratio ratio-28:20">
                           <img
-                            src={elm.imageSrc}
-                            alt="image"
+                            src={`${__STRAPI_CLIENT_URL__}`+elm.attributes.tripimage.data[0].attributes.url}
+                            // src="https://c8.alamy.com/comp/2PDPTE6/i-love-goa-sign-candolim-beach-goa-india-2PDPTE6.jpg"
                             className="img-ratio rounded-12"
                           />
                         </div>
@@ -74,11 +131,11 @@ export default function TourSlider() {
                       <div className="tourCard__content px-10 pt-10">
                         <div className="tourCard__location d-flex items-center text-13 text-light-2">
                           <i className="icon-pin d-flex text-16 text-light-2 mr-5"></i>
-                          {elm.location}
+                          {elm.attributes.state}
                         </div>
 
                         <h3 className="tourCard__title text-16 fw-500 mt-5">
-                          <span>{elm.title}</span>
+                          <span>{elm.attributes.title}</span>
                         </h3>
 
                         <div className="tourCard__rating d-flex items-center text-13 mt-5">
@@ -94,12 +151,12 @@ export default function TourSlider() {
                         <div className="d-flex justify-between items-center border-1-top text-13 text-dark-1 pt-10 mt-10">
                           <div className="d-flex items-center">
                             <i className="icon-clock text-16 mr-5"></i>
-                            {elm.duration}
+                            {elm.attributes.duration}
                           </div>
 
                           <div>
                             From{" "}
-                            <span className="text-16 fw-500">₹ {elm.price}</span>
+                            <span className="text-16 fw-500">₹ {elm.attributes.cost}</span>
                           </div>
                         </div>
                       </div>

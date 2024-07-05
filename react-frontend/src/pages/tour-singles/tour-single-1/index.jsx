@@ -1,8 +1,7 @@
- 
+
 import MetaComponent from "@/components/common/MetaComponent";
 import Header3 from "@/components/layout/header/Header3";
-import PageHeader from "@/components/tourSingle/PageHeader";
-import TourSlider from "@/components/tourSingle/TourSlider";
+import PageHeader from "@/components/tourSingle/PageHeader"; 
 import SingleOne from "@/components/tourSingle/pages/SingleOne";
 import FooterFour from "@/components/layout/footers/FooterFour";
 import { allTour } from "@/data/tours";
@@ -20,16 +19,15 @@ export default function TourSinglePage1() {
   let params = useParams();
   const id = params.id;
   const tour = allTour.find((item) => item.id == id) || allTour[0];
-
+  console.log(tour)
   return (
     <>
       <MetaComponent meta={metadata} />
 
       <main>
         <Header3 />
-        <PageHeader /> 
-        <SingleOne tour={tour} />
-        <TourSlider />
+        <PageHeader />
+        <SingleOne tour={tour} /> 
         <FooterFour />
       </main>
     </>

@@ -31,7 +31,7 @@ export default function Gallery1(tourData) {
         <div className="tourSingleGrid__grid mobile-css-slider-2">
           {tourData.tourData.map((elm, i)=> (
             // console.log(elm)
-              <img src={"http://localhost:1337"+elm.attributes.url} alt="image" />
+              <img src={`${__STRAPI_CLIENT_URL__}`+elm.attributes.url} alt="image" />
           ))}
           {/* <img src="/img/TripDetails-1.jpg" alt="image" />
           <img src="/img/TripDetails-2.jpg" alt="image" />

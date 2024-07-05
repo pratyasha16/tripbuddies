@@ -41,7 +41,7 @@ export default function Hero() {
           <div className="row justify-center">
             <div className="col-12">
               <div className="pageHeader__content">
-                <h1 className="pageHeader__title">India</h1>
+                <h1 className="pageHeader__title">Find your trip</h1>
 
                 <p className="pageHeader__text">
                   A tropical paradise made for animal lovers replete with monkey

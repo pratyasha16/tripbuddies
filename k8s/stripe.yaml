@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stripe-backend
+  labels: 
+    app: stripe-backend
+    component: stripe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stripe-backend
+  template:
+    metadata:
+      labels:
+        app: strapi-cms
+    spec:
+      containers:
+      - name: strapi
+        image: tripbuddies.azurecr.io/stripe:latest
+        ports:
+        - containerPort: 4242
+        envFrom:
+        - configMapRef:
+            name: tripbuddies-cm
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: stripe-backend-svc
+spec:
+  selector:
+    app: stripe-backend
+  type: LoadBalancer
+  ports:
+  - protocol: "TCP"
+    port: 80 
+    targetPort: 4242

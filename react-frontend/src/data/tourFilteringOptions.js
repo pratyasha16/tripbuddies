@@ -1,10 +1,14 @@
 export const toursTypes = [
-  "Nature Tours",
-  "Adventure Tours",
-  "Cultural Tours",
-  "Food Tours",
-  "City Tours",
-  "Cruises Tours",
+  "Hiking",
+  "Rafting",
+  "Mountain biking",
+  "Climbing",
+  "Scuba diving",
+  "Backpacking",
+  "Kayaking",
+  "Skydiving",
+  "Surfing",
+  "Ziplining"
 ];
 
 export const durations = [

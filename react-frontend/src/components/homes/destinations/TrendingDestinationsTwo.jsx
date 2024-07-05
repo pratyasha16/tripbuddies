@@ -1,4 +1,4 @@
-import { destinationsEight } from "@/data/destinations";
+import { destinationsTwo } from "@/data/destinations";
 
 import { Link } from "react-router-dom";
 import React from "react";
@@ -36,10 +36,10 @@ export default function TrendingDestinationsTwo() {
           data-aos-delay=""
           className="row y-gap-30 justify-between pt-40 sm:pt-20"
         >
-          {destinationsEight.map((elm, i) => (
+          {destinationsTwo.map((elm, i) => (
             <div key={i} className="col-lg-3 col-md-6">
               <Link
-                to="/tour-list-1"
+                to={`/tour-list-1/${elm.name}`}
                 className="featureCard -type-4 -hover-image-scale"
               >
                 <div className="featureCard__image ratio ratio-3:4 -hover-image-scale__image rounded-12">
@@ -47,7 +47,7 @@ export default function TrendingDestinationsTwo() {
                 </div>
 
                 <div className="featureCard__content text-center">
-                  <h4 className="text-20 fw-500 text-white">{elm.name}</h4>
+                  <h4 className="text-22 fw-700 text-white">{elm.name}</h4>
                   <div className="text-14 lh-14 text-white"> 
                   </div>
                 </div>

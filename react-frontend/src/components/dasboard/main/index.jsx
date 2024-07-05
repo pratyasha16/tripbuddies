@@ -21,8 +21,8 @@ export default function DBMain() {
             <h1 className="text-30">Dashboard</h1>
             <p className="">Lorem ipsum dolor sit amet, consectetur.</p> 
 
-            <div className="text-center pt-30">
-              © Copyright Valtech {new Date().getFullYear()}
+            <div className="text-center pt-80 pb-20">
+            © Copyright Trip Planner, Machathon-Valtech {new Date().getFullYear()}
             </div>
           </div>
         </div>

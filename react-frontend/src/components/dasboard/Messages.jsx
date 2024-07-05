@@ -173,8 +173,8 @@ export default function Messages() {
               </div>
             </div>
 
-            <div className="text-center pt-30">
-              © Copyright Valtech {new Date().getFullYear()}
+            <div className="text-center pt-80 pb-20">
+            © Copyright Trip Planner, Machathon-Valtech {new Date().getFullYear()}
             </div>
           </div>
         </div>

@@ -40,7 +40,7 @@ export default function ImageLightBox({
               {i + 1} / {images.tourData.length}
             </div>
             <img
-              src={"http://localhost:1337"+elm.attributes.url}
+              src={`${__STRAPI_CLIENT_URL__}`+elm.attributes.url}
               style={{
                 height: "100%",
                 width: "100%",

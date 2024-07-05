@@ -2,8 +2,8 @@ import { excluded, included } from "@/data/tourSingleContent";
 import React from "react";
 
 export default function Included(tourData) {
-  console.log(tourData)
-  console.log(tourData.tourData.attributes.Included)
+  // console.log(tourData)
+  // console.log(tourData.tourData.attributes.Included)
   return (
     <div className="row x-gap-130 y-gap-20 pt-20">
       <div className="col-lg-6">

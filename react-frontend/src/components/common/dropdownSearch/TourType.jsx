@@ -1,9 +1,8 @@
 import React from "react";
 const options = [
-  "Bike Trips",
+  "Bike",
   "Treks",
   "Hiking",
-
   "Bag Packing Trips",
   "Beach Tours",
 ];

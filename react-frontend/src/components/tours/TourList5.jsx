@@ -13,14 +13,14 @@ import RangeSlider from "../common/RangeSlider";
 
 import { Link } from "react-router-dom";
 
-export default function TourList5() {
+export default function TourList5(tourData) {
   const [sortOption, setSortOption] = useState("");
   const [ddActives, setDdActives] = useState(false);
   const dropDownContainer = useRef();
   const dropDownContainer2 = useRef();
 
   const [curentDD, setCurentDD] = useState("");
-
+console.log(tourData)
   useEffect(() => {
     const handleClick = (event) => {
       if (
@@ -311,7 +311,7 @@ export default function TourList5() {
         </div>
 
         <div className="row y-gap-30 pt-30">
-          {tourDataThree.map((elm, i) => (
+          {tourData.tourData.map((elm, i) => (
             <div key={i} className="col-lg-3 col-sm-6">
               <Link
                 to={`/tour-single-1/${elm.id}`}
@@ -320,7 +320,7 @@ export default function TourList5() {
                 <div className="tourCard__header">
                   <div className="tourCard__image ratio ratio-28:20">
                     <img
-                      src={elm.imageSrc}
+                      src={`${__STRAPI_CLIENT_URL__}`+elm.attributes.tripimage.data[0].attributes.url}
                       alt="image"
                       className="img-ratio rounded-12"
                     />
@@ -334,11 +334,11 @@ export default function TourList5() {
                 <div className="tourCard__content px-10 pt-10">
                   <div className="tourCard__location d-flex items-center text-13 text-light-2">
                     <i className="icon-pin d-flex text-16 text-light-2 mr-5"></i>
-                    {elm.location}
+                    {elm.attributes.state}
                   </div>
 
                   <h3 className="tourCard__title text-16 fw-500 mt-5">
-                    <span>{elm.title}</span>
+                    <span>{elm.attributes.title}</span>
                   </h3>
 
                   <div className="tourCard__rating d-flex items-center text-13 mt-5">
@@ -354,11 +354,11 @@ export default function TourList5() {
                   <div className="d-flex justify-between items-center border-1-top text-13 text-dark-1 pt-10 mt-10">
                     <div className="d-flex items-center">
                       <i className="icon-clock text-16 mr-5"></i>
-                      {elm.duration}
+                      {elm.attributes.duration>1 ? elm.attributes.duration+" days" : elm.attributes.duration+ " day"}
                     </div>
 
                     <div>
-                      From <span className="text-16 fw-500">₹ {elm.price}</span>
+                      From <span className="text-16 fw-500">₹ {elm.attributes.cost}</span>
                     </div>
                   </div>
                 </div>

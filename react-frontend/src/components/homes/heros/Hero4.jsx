@@ -11,6 +11,27 @@ export default function Hero4() {
   const [calender, setCalender] = useState("");
   const [tourType, setTourType] = useState("");
   const navigate = useNavigate();
+
+  const queryParams = {
+    date: calender,
+    location: location,
+    tourType: tourType
+  };
+
+  console.log(queryParams)
+// Function to convert query parameters object to query string
+const buildQueryString = (params) => {
+  return Object.keys(params)
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+    .join('&');
+};
+const handleNavigate = () => {
+  const queryString = buildQueryString(queryParams);
+  navigate(`/tour-list-2?${queryString}`);
+};  
+
+
+
   useEffect(() => {
     setCurrentActiveDD("");
   }, [location, calender, tourType, setCurrentActiveDD]);
@@ -135,7 +156,8 @@ export default function Hero4() {
 
                 <div className="searchForm__button">
                   <button
-                    onClick={() => navigate("/tour-list-2")}
+                    // onClick={() => navigate("/tour-list-2")}
+                    onClick={handleNavigate}
                     className="button -dark-1 size-60 bg-accent-1 rounded-200 text-white"
                   >
                     <i className="icon-search text-16"></i>

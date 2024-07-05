@@ -101,7 +101,7 @@ export default function Register() {
               <div className="row y-gap-15">
 
                 <div className="col">
-                  <button className="button -md -outline-red-1 text-red-1 col-12">
+                  <button className="button -sm col-12">
                     {/* <i className="icon-google mr-10"></i> */}
                     <GoogleButton onClick={handleSubmitGoogleAccount}/>
                   </button>

@@ -11,9 +11,11 @@ export default function FeaturedToures() {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const response = await axios.get("http://localhost:1337/api/trips?populate=*");
+        const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*');
+
         setTourData(response.data.data);
-        console.log(response.data.data);
+        
+        // console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching data from Strapi:", error);
       }
@@ -64,7 +66,7 @@ export default function FeaturedToures() {
               >
                 <div className="tourCard__header">
                   <div className="tourCard__image ratio ratio-28:20">
-                    <img src={"http://localhost:1337"+elm.attributes.tripimage.data[0].attributes.url} alt="image" className="img-ratio" />
+                    <img src={`${__STRAPI_CLIENT_URL__}`+elm.attributes.tripimage.data[0].attributes.url} alt="image" className="img-ratio" />
                   </div>
 
                   <button className="tourCard__favorite">
@@ -75,7 +77,7 @@ export default function FeaturedToures() {
                 <div className="tourCard__content px-20 py-10">
                   <div className="tourCard__location d-flex items-center text-13 text-light-2">
                     <i className="icon-pin d-flex text-16 text-light-2 mr-5"></i>
-                    {elm.location}
+                    {elm.attributes.state+", India"}
                   </div>
 
                   <h3 className="tourCard__title text-16 fw-500 mt-5">

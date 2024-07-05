@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Calender from "../common/dropdownSearch/Calender";
+import moment from 'moment';
 
 import { times } from "@/data/tourSingleContent";
 import { Link } from "react-router-dom";
-export default function TourSingleSidebar() {
+export default function TourSingleSidebar(tourData) {
   const prices = {
     adultPrice: 94,
     youthPrice: 84,
@@ -30,12 +31,25 @@ export default function TourSingleSidebar() {
 
   const [selectedTime, setSelectedTime] = useState("");
   const [activeTimeDD, setActiveTimeDD] = useState(false);
+  //trip date variables
+  const startDateTime = moment(tourData.tourData.attributes.startdate);
+  const extractedStartDate = startDateTime.format("MMMM-DD-YYYY");
+  const extractedStartTime = startDateTime.format("HH:mm:ss");
+  
+  const endDateTime = moment(tourData.tourData.attributes.enddate);
+  const extractedEndDate = endDateTime.format("MMMM-DD-YYYY");
+  const extractedEndTime = endDateTime.format("HH:mm:ss");
+  // var startDateString
+  // const timeString = dateObject.toLocaleTimeString();
+
+  console.log(extractedStartDate+"   "+extractedStartTime)
+  // console.log(tourData.tourData.startdate)
 
   return (
     <div className="tourSingleSidebar">
       <div className="d-flex items-center">
         <div>From</div>
-        <div className="text-20 fw-500 ml-10">₹ 1,200</div>
+        <div className="text-20 fw-500 ml-10">{tourData.tourData.attributes.cost}</div>
       </div>
 
       <div className="searchForm -type-1 -sidebar mt-20">

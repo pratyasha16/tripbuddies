@@ -9,6 +9,7 @@ import TourSingleSidebar from "../TourSingleSidebar";
 import Gallery1 from "../Galleries/Gallery1";
 import RoadMap2 from "../Roadmap2";
 import axios from "axios";
+import TourSlider from "@/components/tourSingle/TourSlider";
 import { Link } from "react-router-dom";
 
 export default function SingleOne({ tour }) {
@@ -18,7 +19,7 @@ export default function SingleOne({ tour }) {
     if (tour && tour.id) {
       const fetchTours = async () => {
         try {
-          const response = await axios.get(`http://localhost:1337/api/trips/${tour.id}?populate=*`);
+          const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+`/api/trips/${tour.id}?populate=*`);
           setTourData(response.data.data);
           console.log(response.data.data);
         } catch (error) {
@@ -57,7 +58,7 @@ export default function SingleOne({ tour }) {
                 <OthersInformation tourData={tourData} />
               </div>
 
-              <Overview />
+              <Overview tourData={tourData}/>
 
               <div className="line mt-60 mb-60"></div>
 
@@ -81,19 +82,21 @@ export default function SingleOne({ tour }) {
               <h2 className="text-30">FAQ</h2>
 
               <div className="accordion -simple row y-gap-20 mt-30 js-accordion">
-                <Faq />
+                <Faq tourData={tourData}/>
               </div>
               <div className=" mt-60 mb-60"></div>
             </div>
 
             <div className="col-lg-4 ">
               <div className="d-flex justify-end js-pin-content">
-                <TourSingleSidebar />
+                <TourSingleSidebar tourData={tourData}/>
               </div>
             </div>
           </div>
         </div>
       </section>
+      {/* <TourSlider tourData={tourData}/> */}
+
     </>
   );
 }
