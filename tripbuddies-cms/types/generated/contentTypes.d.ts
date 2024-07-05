@@ -889,6 +889,7 @@ export interface ApiCompanionCompanion extends Schema.CollectionType {
         },
         string
       >;
+    Photourl: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -990,7 +991,7 @@ export interface ApiTripTrip extends Schema.CollectionType {
         ]
       >;
     startdate: Attribute.DateTime;
-    Itinerary: Attribute.Blocks;
+    queries: Attribute.Blocks;
     enddate: Attribute.DateTime & Attribute.Unique;
     activities: Attribute.JSON &
       Attribute.CustomField<

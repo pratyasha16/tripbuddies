@@ -28,6 +28,9 @@
     "Mobile": {
       "type": "biginteger",
       "min": "10"
+    },
+    "Photourl": {
+      "type": "string"
     }
   }
 }

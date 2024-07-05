@@ -27,6 +27,13 @@ const config = {
     // 'zh-Hans',
     // 'zh',
   ],
+  translations: {
+    en: {
+      "Auth.form.welcome.title": "Welcome to Your App!",
+      "Auth.form.welcome.subtitle": "Log in to your App",
+    },
+  },
+  translations: { en: { 'app.components.LeftMenu.navbrand.title': 'hello', 'app.components.LeftMenu.navbrand.title': 'Custom workplace' } },
 };
 
 const bootstrap = (app) => {

@@ -11,7 +11,11 @@ import meilisearch from "strapi-plugin-meilisearch/strapi-admin";
 import multiSelect from "strapi-plugin-multi-select/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
+import customisations from "../../src/admin/app.js";
+
 renderAdmin(document.getElementById("strapi"), {
+  customisations,
+
   plugins: {
     "google-maps": googleMaps,
     "strapi-cloud": strapiCloud,

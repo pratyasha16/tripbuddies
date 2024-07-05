@@ -121,7 +121,7 @@
     "startdate": {
       "type": "datetime"
     },
-    "Itinerary": {
+    "queries": {
       "type": "blocks"
     },
     "enddate": {
