@@ -15,13 +15,6 @@
     "Name": {
       "type": "string"
     },
-    "FoodChoice": {
-      "type": "enumeration",
-      "enum": [
-        "vegetarian",
-        "non-vegetarian"
-      ]
-    },
     "Age": {
       "type": "integer"
     },
@@ -30,6 +23,12 @@
       "min": "10"
     },
     "Photourl": {
+      "type": "string"
+    },
+    "Gender": {
+      "type": "string"
+    },
+    "FoodChoice": {
       "type": "string"
     }
   }

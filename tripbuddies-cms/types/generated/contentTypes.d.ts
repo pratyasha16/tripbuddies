@@ -875,7 +875,6 @@ export interface ApiCompanionCompanion extends Schema.CollectionType {
   };
   attributes: {
     Name: Attribute.String;
-    FoodChoice: Attribute.Enumeration<['vegetarian', 'non-vegetarian']>;
     Age: Attribute.Integer;
     Mobile: Attribute.BigInteger &
       Attribute.SetMinMax<
@@ -885,6 +884,8 @@ export interface ApiCompanionCompanion extends Schema.CollectionType {
         string
       >;
     Photourl: Attribute.String;
+    Gender: Attribute.String;
+    FoodChoice: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
