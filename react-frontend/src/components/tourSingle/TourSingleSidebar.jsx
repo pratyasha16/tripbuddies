@@ -4,21 +4,23 @@ import moment from 'moment';
 
 import { times } from "@/data/tourSingleContent";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 export default function TourSingleSidebar(tourData) {
   const prices = {
     adultPrice: 94,
     youthPrice: 84,
     childrenPrice: 20,
     extraService: 40,
-    servicePerPerson: 40,
+    servicePerPerson: tourData.tourData.attributes.cost,
   };
-
+  const navigateTo = useNavigate();
   const [adultNumber, setAdultNumber] = useState(3);
   const [youthNumber, setYouthNumber] = useState(2);
   const [childrenNumber, setChildrenNumber] = useState(4);
   const [isExtraService, setisExtraService] = useState(false);
-  const [isServicePerPerson, setIsServicePerPerson] = useState(false);
+  const [isServicePerPerson, setIsServicePerPerson] = useState(true);
   const [extraCharge, setExtraCharge] = useState(0);
+
   useEffect(() => {
     setExtraCharge(0);
     if (isExtraService) {
@@ -39,11 +41,21 @@ export default function TourSingleSidebar(tourData) {
   const endDateTime = moment(tourData.tourData.attributes.enddate);
   const extractedEndDate = endDateTime.format("MMMM-DD-YYYY");
   const extractedEndTime = endDateTime.format("HH:mm:ss");
-  // var startDateString
-  // const timeString = dateObject.toLocaleTimeString();
+  const duration = tourData.tourData.attributes.duration;
+  const tripTitle = tourData.tourData.attributes.title;
+ // const tripCost =40;
 
-  // console.log(extractedStartDate+"   "+extractedStartTime)
-  // console.log(tourData.tourData.startdate)
+  const handleSubmit = (values) => {
+    const totalTripCost = (
+        prices.adultPrice * adultNumber +
+        prices.youthPrice * youthNumber +
+        prices.childrenPrice * childrenNumber +
+        extraCharge * 1
+    ).toFixed(2);
+    // Simulate a successful payment
+    values.preventDefault();
+    navigateTo('/personal-details', { state: { totalTripCost, tripTitle, duration} });
+  };
 
   return (
     <div className="tourSingleSidebar">
@@ -63,9 +75,8 @@ export default function TourSingleSidebar(tourData) {
                 <h5>From</h5>
                 <div>
                   <span className="js-first-date">
-                    <Calender />
+                    {extractedStartDate} -{extractedEndDate}
                   </span>
-                  <span className="js-last-date"></span>
                 </div>
               </div>
               <div className="searchFormItem__icon_chevron">
@@ -86,7 +97,7 @@ export default function TourSingleSidebar(tourData) {
               <div className="searchFormItem__content">
                 <h5>Time</h5>
                 <div className="js-select-control-chosen">
-                  {selectedTime ? selectedTime : "Choose time"}
+                  {extractedStartDate} {extractedStartTime} - {extractedEndDate} {extractedEndTime}
                 </div>
               </div>
               <div className="searchFormItem__icon_chevron">
@@ -97,7 +108,7 @@ export default function TourSingleSidebar(tourData) {
             <div
               className={`searchFormItemDropdown -tour-type ${
                 activeTimeDD ? "is-active" : ""
-              }`}
+              }` }
               data-x="time"
               data-x-toggle="is-active"
             >
@@ -285,7 +296,7 @@ export default function TourSingleSidebar(tourData) {
         </div>
       </div>
       <Link to="/personal-details">
-      <button className="button -md -dark-1 col-12 bg-accent-1 text-white mt-20">
+      <button className="button -md -dark-1 col-12 bg-accent-1 text-white mt-20" onClick={handleSubmit}>
      <b> Join Now</b> 
         <i className="icon-arrow-top-right ml-10"></i>
       </button>

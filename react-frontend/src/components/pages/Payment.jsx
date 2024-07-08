@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 const stripePromise = loadStripe('pk_test_51PNGQQP7uV08NbFwBTjw5xHkFaCY3E8x98Vr0eeXolNS9Ti0Vvyx2ps4EgoCga9WXpRSsToGPBnD63xssVcK9FSG00YT9OvQ1w');
 
-const CheckoutForm = ({ tripCost, tripTitle, members }) => {
+const CheckoutForm = ({ tripCost, finalTripTitle}) => {
     const stripe = useStripe();
     const elements = useElements();
     const navigateTo = useNavigate();

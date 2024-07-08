@@ -4,7 +4,7 @@ import { Formik, ErrorMessage } from 'formik';
 import '../../styles/style.css';
 import * as Yup from 'yup';
 
-const PersonalDetails = () => {
+const PersonalDetails = (totalTripCost, tripTitle, duration) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const [trip, setTrip] = useState('');
     const [address, setAddress] = useState('');
@@ -31,7 +31,7 @@ const PersonalDetails = () => {
             state: values.state,
             country: values.country
         };
-        navigateTo('/confirmation', { state: { personalInfo} });
+        navigateTo('/confirmation', { state: { personalInfo, totalTripCost, tripTitle, duration} });
     };
     const validationSchema = Yup.object().shape({
         fullName: Yup.string()

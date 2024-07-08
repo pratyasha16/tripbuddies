@@ -2,20 +2,20 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/style.css';
 
-const Confirmation = (personalInfo) => {
+const Confirmation = (personalInfo, totalTripCost, tripTitle, duration) => {
     const navigate = useNavigate();
     //const tripTitle = localStorage.getItem("tripTitle");
-    const tripTitle = "goa splash"
+    const finalTripTitle = tripTitle;
     const date = "19/07/2024";
-    const tripDuration = "3 days"
-    const tripCost = "18000"
+    const tripDuration = duration;
+    const tripCost = totalTripCost;
     const [members, setMembers] = useState('');
     const navigateTo = useNavigate();
 
     const handleSubmit = (values) => {
         // Simulate a successful payment
         values.preventDefault();
-            navigateTo('/payment', { state: { tripCost, tripTitle, members} });
+            navigateTo('/payment', { state: { tripCost, finalTripTitle} });
         };
 
     return (
