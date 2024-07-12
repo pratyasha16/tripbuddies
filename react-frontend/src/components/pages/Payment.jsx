@@ -22,7 +22,7 @@ const CheckoutForm = ({ tripCost, finalTripTitle}) => {
                         //const response = await fetch('http://localhost:4242/api/stripe/create-checkout-ses
                 method: 'POST',
                 
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' ,'Set-Cookie': 'promo_shown=1; SameSite=Strict'},
                 body: JSON.stringify({ paymentMethod }),
             });
 
