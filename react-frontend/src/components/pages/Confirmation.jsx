@@ -127,12 +127,12 @@ const Confirmation = (personalInfo, totalTripCost, tripTitle, duration) => {
                                     </select>
                                 </div>
                                 <button type="submit" onClick={handleSubmit}>Proceed to Booking Confirmation</button>
-        </form>
+                            </form>
 
-                </div>
-            </div>
-        </div>
-      </section>
+                           </div>
+                       </div>
+                     </div>
+                </section>
     );
 };
 
