@@ -23,7 +23,7 @@ export default function TourListPage1() {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*', {
+        const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'api/trips?populate=*', {
           params: {
             filters: {
               $and: [
