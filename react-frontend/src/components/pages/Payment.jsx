@@ -18,10 +18,10 @@ const CheckoutForm = ({ tripCost, finalTripTitle}) => {
         });
 
         if (!error) {
-             const response = await fetch(`${__STRIPE_CLIENT_URL__}`+'api/stripe/create-checkout-session', {
+             const response = await fetch(`${__STRIPE_CLIENT_URL__}`+'/api/stripe/create-checkout-session', {
                         //const response = await fetch('http://localhost:4242/api/stripe/create-checkout-ses
                 method: 'POST',
-                
+                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' ,'Set-Cookie': 'promo_shown=1; SameSite=Strict'},
                 body: JSON.stringify({ paymentMethod }),
             });
