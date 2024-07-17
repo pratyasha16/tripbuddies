@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { storage } from '../../../config/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const metadata = {
@@ -20,6 +23,7 @@ export default function Profile() {
     const [mobile, setMobile] = useState('');
     const [gender, setGender] = useState('');
     const [foodPreference, setFoodPreference] = useState('');
+    const navigateTo = useNavigate();
 
     const [foodChoice, setFoodChoice] = useState('');
 
@@ -27,7 +31,6 @@ export default function Profile() {
   const [imaget, setImaget] = useState("");
 
     const [imageUrl, setImageUrl] = useState("");
-  // const [image2, setImage2] = useState("/img/Trips-1.jpg");
 
   const handleImageChange = (event, func) => {
     const file = event.target.files[0];
@@ -47,8 +50,8 @@ export default function Profile() {
   };
 
 
-  // useEffect(() => {
     const postCompanion = async (e) => {
+      toast.info("We're finding the perfect match for you! Hang tight!");
       e.preventDefault();
       console.log(gender,name,age,mobile,foodPreference)
 
@@ -60,43 +63,25 @@ export default function Profile() {
             const url = await getDownloadURL(imageRef);
             setImageUrl(url);
             console.log("Image URL:", url);
+            const response = await axios.post(`${__STRAPI_CLIENT_URL__}`+'/api/companions', {
+              data: {
+                  Name: name,
+                  Age: age,
+                  Mobile: mobile,
+                  Photourl: url,
+                  Gender: gender,
+                  FoodChoice: foodPreference,
+              }
+          });
         } catch (error) {
             console.error("Error uploading image: ", error);
         }
-      // try {
-      //   const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*');
-      //   // const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*');
-
-      //   // const response = await fetch(`${__STRIPE_CLIENT_URL__}`+'/api/stripe/create-checkout-session', {
-
-      //   setTourData(response.data.data);
-
-      //   // console.log(response.data.data);
-      // } catch (error) {
-      //   console.error("Error fetching data from Strapi:", error);
-      // }
-      const response = await axios.post(`${__STRAPI_CLIENT_URL__}`+'/api/companions', {
-        data: {
-            // Name: name,
-            // Age: age,
-            // Mobile: mobile,
-            // FoodChoice: foodPreference,
-            // Photourl: imageUrl,
-            // Gender: gender
-            Name: "name",
-            Age: 22,
-            Mobile: 222,
-            FoodChoice: "Vegetarian",
-            Photourl: "imageUrl",
-        }
-    });
+  
+      
 
     console.log(gender,name,age,mobile,foodPreference)
-
+    navigateTo('/companion', { state: { age, foodPreference} });
     };
-
-  //   fetchTours();
-  // }, []);
 
 
   return (
@@ -104,6 +89,7 @@ export default function Profile() {
 
       <main>
         <Header3 />
+        <ToastContainer position="top-center" autoClose={4000}/>
         <section className="pageHeader -type-2 -secondary">
           <div className="pageHeader__bg">
             <img src="/img/hero.jpg" alt="image" />
@@ -156,50 +142,7 @@ required />
                           <label className="lh-1 text-16 text-light-1">Phone</label>
                         </div>
                       </div>
-                      {/* <div className="col-lg-6">
-                        <div className="form-input ">
-                          <input type="text" required />
-                          <label className="lh-1 text-16 text-light-1">Your likes</label>
-                        </div>
-                      </div> */}
-                      {/* <div className="col-md-6">
-                        <div className="row">
-                          <label className="text-16 lh-1 fw-400 text-dark-1 pb-15">
-                            Gender
-                          </label>
-                          <div className="col-2">
-                        <div className="form-radio d-flex items-center ">
-                          <div className="radio">
-                            <input type="radio" name="name"                     value={gender} 
-                    onChange={(e) => setGender(e.target.value)} 
-                    />
-                            <div className="radio__mark">
-                              <div className="radio__icon"></div>
-                            </div>
-                          </div>
-                          <div className="text-14 lh-1 ml-10">Male</div>
-                        </div>
-                      </div>
-                      <div className="col-2">
-                        <div className="form-radio d-flex items-center ">
-                          <div className="radio">
-                            <input type="radio" name="name"                     value={gender} 
-                    onChange={(e) => setGender(e.target.value)} 
-                    />
-                            <div className="radio__mark">
-                              <div className="radio__icon"></div>
-                            </div>
-                          </div>
-                          <div className="text-14 lh-1 ml-10">Female</div>
-                        </div>
-                      </div>
-
-                        </div>
-                      </div> */}
-                     
-
                       <div>
-                {/* <label className="lh-1 text-16 text-light-1">Gender</label> */}
                 <select value={gender} onChange={(e) => setGender(e.target.value)}  required>
                     <option value="">Select Gender</option>
                     <option value="male">Male</option>
@@ -208,7 +151,6 @@ required />
             </div>
 
                       <div>
-                {/* <label className="lh-1 text-16 text-light-1">Food Preference</label> */}
                 <select value={foodPreference} onChange={(e) => setFoodPreference(e.target.value)}  required>
                     <option value="">Select a food preference</option>
                     <option value="Vegetarian">Vegetarian</option>
@@ -217,43 +159,6 @@ required />
                     <option value="Other">Other</option>
                 </select>
             </div>
-                      {/* <div className="col-md-6">
-                        <div className="row">
-                          <label className="text-16 lh-1 fw-400 text-dark-1 pb-15">
-                          Food preference
-                          </label>
-                          <div className="col-2">
-                        <div className="form-radio d-flex items-center ">
-                          <div className="radio">
-                            <input type="radio" name="name" />
-                            <div className="radio__mark">
-                              <div className="radio__icon"></div>
-                            </div>
-                          </div>
-                          <div className="text-14 lh-1 ml-10">Veg</div>
-                        </div>
-                      </div>
-                      <div className="col-2">
-                        <div className="form-radio d-flex items-center ">
-                          <div className="radio">
-                            <input type="radio" name="name" />
-                            <div className="radio__mark">
-                              <div className="radio__icon"></div>
-                            </div>
-                          </div>
-                          <div className="text-14 lh-1 ml-10">NonVeg</div>
-                        </div>
-                      </div> */}
-
-                        {/* </div>
-                      </div> */}
-
-
-
-                     
-
-
-
                       <div className="col-12">
                         <h4 className="text-18 fw-500 mb-20">Your photo</h4>
                         <div className="row x-gap-20 y-gap">
@@ -296,73 +201,26 @@ required />
                               />
                             </div>
                           )}
-                          {/* {image2 ? (
-                            <div className="col-auto">
-                              <div className="relative">
-                                <img
-                                  src={image2}
-                                  alt="image"
-                                  className="size-200 rounded-12 object-cover"
-                                />
-                                <button
-                                  onClick={() => {
-                                    setImage2("");
-                                  }}
-                                  className="absoluteIcon1 button -dark-1"
-                                >
-                                  <i className="icon-delete text-18"></i>
-                                </button>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="col-auto">
-                              <label
-                                htmlFor="imageInp2"
-                                className="size-200 rounded-12 border-dash-1 bg-accent-1-05 flex-center flex-column"
-                              >
-                                <img alt="image" src={"/img/upload.svg"} />
-
-                                <div className="text-16 fw-500 text-accent-1 mt-10">
-                                  Upload Images
-                                </div>
-                              </label>
-                              <input
-                                onChange={handleImageChange}
-                                // accept="image/*"
-                                id="imageInp2"
-                                type="file"
-                                style={{ display: "none" }}
-                              />
-                            </div>
-                          )} */}
                         </div> 
                         <div className="text-14 mt-20">
                           PNG or JPG no bigger than 600px wide and tall.
                         </div> 
                         <button className="button -md -dark-1 bg-accent-1 text-white mt-30" onClick={postCompanion}>
-                          <Link to={"/companion"}>  Submit</Link>
+                          <Link>  Submit</Link>
                           <i className="icon-arrow-top-right text-16 ml-10"></i>
                         </button>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
               </div>
               <div className="col-md-2"> </div>
-
-
-
-
             </div>
           </div>
         </section>
-
-
-
         <FooterFour />
       </main>
     </>
   );
 }
+
