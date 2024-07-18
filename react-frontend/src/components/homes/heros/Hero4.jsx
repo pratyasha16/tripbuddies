@@ -156,7 +156,6 @@ const handleNavigate = () => {
 
                 <div className="searchForm__button">
                   <button
-                    // onClick={() => navigate("/tour-list-2")}
                     onClick={handleNavigate}
                     className="button -dark-1 size-60 bg-accent-1 rounded-200 text-white"
                   >

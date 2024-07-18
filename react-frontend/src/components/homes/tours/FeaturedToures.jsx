@@ -1,5 +1,4 @@
 import Stars from "@/components/common/Stars";
-// import { tourData } from "@/data/tours";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
@@ -15,7 +14,6 @@ export default function FeaturedToures() {
 
         setTourData(response.data.data);
         
-        // console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching data from Strapi:", error);
       }
@@ -24,8 +22,7 @@ export default function FeaturedToures() {
     fetchTours();
   }, []);
 
-  //debug
-  // tourData.map((elm, i) => (console.log("http://localhost:1337"+elm.attributes.tripimage.data[0].attributes.url)));
+  
    return (
     <section className="layout-pt-xl layout-pb-xl ">
       <div className="container">

@@ -13,21 +13,7 @@ export default function TourList2() {
   const [ddActives, setDdActives] = useState(false);
   const [sidebarActive, setSidebarActive] = useState(false);
   const dropDownContainer = useRef();
-  // const [tourData, setTourData] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchTours = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:1337/api/trips?populate=*");
-  //       setTourData(response.data.data);
-  //       console.log(response.data.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data from Strapi:", error);
-  //     }
-  //   };
-
-  //   fetchTours();
-  // }, []);
+  
 
 
   useEffect(() => {

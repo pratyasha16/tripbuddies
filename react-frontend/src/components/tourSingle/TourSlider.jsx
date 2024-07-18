@@ -25,39 +25,7 @@ export default function TourSlider(tourData) {
 }, []); 
 
   
-  // useEffect(() => {
-  //   if (!tourData || !tourData.tourData || !tourData.tourData.attributes) {
-  //     console.log("tourData is not properly initialized or missing attributes");
-  //     return;
-  //   }
-
-  //   const fetchTours = async () => {
-  //     try {
-  //       console.log("hello from try")
-  //       const response = await axios.get('http://localhost:1337/api/trips?populate=*', {
-  //         params: {
-  //           filters: {
-  //             state: { $contains: tourData.tourData.attributes.state },
-  //           },
-  //         },
-  //       });
-  //       setRecommendTrip(response.data.data);
-  //       console.log("Data fetched successfully:", response.data.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data from Strapi:", error);
-  //     }
-  //   };
-
-  //   fetchTours();
-  // }, [tourData]);
-
-
-// console.log(recommendTrip)
-
-// {recommendTrip.map((elm, i) => (
-
-// console.log("http://localhost:1337"+elm.attributes.tripimage.data[0].attributes.url)
-// ))}
+ 
 
   if (!tourData) {
     return <div>Loading...</div>;
@@ -118,7 +86,6 @@ export default function TourSlider(tourData) {
                         <div className="tourCard__image ratio ratio-28:20">
                           <img
                             src={`${__STRAPI_CLIENT_URL__}`+elm.attributes.tripimage.data[0].attributes.url}
-                            // src="https://c8.alamy.com/comp/2PDPTE6/i-love-goa-sign-candolim-beach-goa-india-2PDPTE6.jpg"
                             className="img-ratio rounded-12"
                           />
                         </div>

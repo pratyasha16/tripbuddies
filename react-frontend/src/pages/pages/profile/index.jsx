@@ -24,9 +24,6 @@ export default function Profile() {
     const [gender, setGender] = useState('');
     const [foodPreference, setFoodPreference] = useState('');
     const navigateTo = useNavigate();
-
-    const [foodChoice, setFoodChoice] = useState('');
-
   const [image1, setImage1] = useState("");
   const [imaget, setImaget] = useState("");
 
@@ -79,8 +76,7 @@ export default function Profile() {
   
       
 
-    console.log(gender,name,age,mobile,foodPreference)
-    navigateTo('/companion', { state: { age, foodPreference} });
+    navigateTo('/companion', { state: { age, foodPreference, mobile} });
     };
 
 

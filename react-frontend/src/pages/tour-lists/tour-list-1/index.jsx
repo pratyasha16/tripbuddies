@@ -19,11 +19,10 @@ export default function TourListPage1() {
 
   let params = useParams();
   const title = params.title;
-  // console.log(title)
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'api/trips?populate=*', {
+        const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*', {
           params: {
             filters: {
               $and: [
@@ -33,12 +32,10 @@ export default function TourListPage1() {
           },
         });        
         setTourData(response.data.data);
-// console.log(tourData)
       } catch (error) {
         console.error("Error fetching data from Strapi:", error);
       }
     };
-  
     fetchTours();
   }, []);
 
@@ -51,7 +48,6 @@ export default function TourListPage1() {
         <PageHeader />
         <TourList5 tourData={tourData}/>
 
-        {/* <TourList1 /> */}
         <FooterFour />
       </main>
     </>

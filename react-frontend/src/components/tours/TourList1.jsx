@@ -47,9 +47,6 @@ export default function TourList1() {
     };
   }, []);
 
-  // tourData.map((elm, i) => {
-  //   console.log(elm);
-  // });
 
   return (
     <section className="layout-pb-xl">

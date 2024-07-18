@@ -44,9 +44,5 @@ export const menuData = [
       { id: 58, label: "404 Page", href: "/404" },  
     ],
   },
-  // {
-  //   id: 6,
-  //   label: 'Contact',
-  //   href: 'contact'
-  // }
+ 
 ];

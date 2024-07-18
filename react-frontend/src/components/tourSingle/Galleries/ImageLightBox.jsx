@@ -7,9 +7,6 @@ export default function ImageLightBox({
   currentSlideIndex,
   setCurrentSlideIndex,
 }) {
-  //debug
-  // console.log(images);
-  // {images.tourData.map((elm, i) => (console.log("http://localhost:1337"+elm.attributes.url)))}
 
   return (
     <div
