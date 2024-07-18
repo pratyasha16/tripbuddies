@@ -21,12 +21,13 @@ exports.createCheckoutSession = async (req, res) => {
             ],
             allow_promotion_codes: true,
             mode: 'payment',
-            success_url: '${process.env.CLIENT_URL}/success',
-            cancel_url: '${process.env.CLIENT_URL}/cancel',
+            success_url: `${process.env.CLIENT_URL}/success`,
+            cancel_url: `${process.env.CLIENT_URL}/cancel`,
         });
 
         res.json({ id: session.id });
     } catch (error) {
+        console.log(error);
         res.status(500).send(`Error: ${error.message}`);
     }
 };
@@ -38,6 +39,7 @@ exports.handleWebhook = (req, res) => {
     try {
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
+        console.log(err);
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
