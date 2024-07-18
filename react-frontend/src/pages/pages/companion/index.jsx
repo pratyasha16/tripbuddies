@@ -1,8 +1,5 @@
 import FooterFour from "@/components/layout/footers/FooterFour";
 import Header3 from "@/components/layout/header/Header3";
-import Calender from "@/components/common/dropdownSearch/Calender";
-import Location from "@/components/common/dropdownSearch/Location";
-import TourType from "@/components/common/dropdownSearch/TourType";
 import axios from "axios";
 
 import { useEffect, useState, useRef } from "react";
@@ -14,7 +11,7 @@ const metadata = {
   description: "Trip Planner for all",
 };
 
-export default function MyCompanion() {
+export default function MyCompanion(age, foodPreference) {
   const [currentActiveDD, setCurrentActiveDD] = useState("");
   const [location, setLocation] = useState("");
   const [calender, setCalender] = useState("");
@@ -44,30 +41,30 @@ export default function MyCompanion() {
     };
   }, []);
 
+  useEffect(() => {
+    const fetchCompanions = async () => {
+      try {
+        const response = await axios.get(`${__STRAPI_CLIENT_URL__}/api/companions`, {
+          params: {
+            populate: '*',
+            filters: {
+              FoodChoice: {
+                $contains: 'Vegetarian'
+              }
+            }
+          }
+        });
+        setCompanionData(response.data.data);  // Adjust according to your response structure
 
-  // useEffect(() => {
-  //   const fetchCompanions = async () => {
-  //     try {
-  //       const response = await axios.get(`${__STRAPI_CLIENT_URL__}`+'/api/trips?populate=*', {
-  //         params: {
-  //           filters: {
-  //             $and: [
-  //               { activities: { $containsi: activity.activity} },
-  //             ],
-  //           },
-  //         },
-  //       });        
-  //       setCompanionData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching data from Strapi:", error);
+      }
+    };
 
-  //     } catch (error) {
-  //       console.error("Error fetching data from Strapi:", error);
-  //     }
-  //   };
-  
-  //   fetchComponions();
-  // }, []);
+    fetchCompanions();
+  }, []);
 
-
+  console.log(companionData)
   return (
     <>
       <MetaComponent meta={metadata} />
@@ -79,106 +76,17 @@ export default function MyCompanion() {
           <div className="pageHeader__bg">
             <img src="/img/hero.jpg" alt="image" />
           </div>
-
           <div className="container">
             <div className="row justify-center">
               <div className="col-12">
                 <div className="pageHeader__content">
                   <h1 className="pageHeader__title">Find My Companion</h1>
-
                   <p className="pageHeader__text">
                     A simple way to discover a new traveling
                   </p>
-
-
                 </div>
-
               </div>
             </div>
-            {/* <div className="pageHeader__search">
-              <div className="searchForm -type-1 shadow-1">
-                <div ref={dropDownContainer} className="searchForm__form">
-                  <div className="searchFormItem js-select-control js-form-dd">
-                    <div
-                      className="searchFormItem__button"
-                      onClick={() =>
-                        setCurrentActiveDD((pre) =>
-                          pre == "location" ? "" : "location",
-                        )
-                      }
-                    >
-
-                      <div className="searchFormItem__content  d-contents">
-                        <h5>I am a:</h5>
-                        <div className="js-select-control-chosen ml-10 mt-10 d-contents">
-                          <div className="searchFormItem__icon size-50 rounded-12 border-1 flex-center ml-10">
-                            <i className="text-20"> <img src="/img/male.svg" /> </i>
-                          </div>
-                          <div className="searchFormItem__icon size-50 rounded-12 border-1 flex-center ml-10">
-                            <i className="text-20 sel"> <img src="/img/female.svg" /> </i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-
-                  <div className="searchFormItem js-select-control js-form-dd js-calendar">
-                    <div className="searchFormItem__button"
-                    >
-
-                      <div className="searchFormItem__content d-contents">
-                        <h5>Seeking a:</h5>
-                        <div className="js-select-control-chosen ml-10 mt-10 d-contents">
-                          <div className="searchFormItem__icon size-50 rounded-12 border-1 flex-center ml-10">
-                            <i className="text-20 sel"> <img src="/img/male.svg" /> </i>
-                          </div>
-                          <div className="searchFormItem__icon size-50 rounded-12 border-1 flex-center ml-10">
-                            <i className="text-20"> <img src="/img/female.svg" /> </i>
-                          </div>
-                        </div>
-                        <div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="searchFormItem js-select-control js-form-dd">
-                    <div
-                      className="searchFormItem__button"
-                      onClick={() =>
-                        setCurrentActiveDD((pre) =>
-                          pre == "tourType" ? "" : "tourType",
-                        )
-                      }
-                    >
-                      <div className="searchFormItem__icon size-50 rounded-12 border-1 flex-center">
-                        <i className="text-20 icon-flag"></i>
-                      </div>
-                      <div className="searchFormItem__content">
-                        <h5>Between ages:</h5>
-                        <div className="js-select-control-chosen">
-                          {tourType ? tourType : "All Age"}
-                        </div>
-                      </div>
-                    </div>
-
-                    <TourType
-                      setTourType={setTourType}
-                      active={currentActiveDD === "tourType"}
-                    />
-                  </div>
-                </div>
-
-                <div className="searchForm__button">
-                  <button className="button -dark-1 bg-accent-1 text-white">
-                    <i className="icon-search text-16 mr-10"></i>
-                    Search
-                  </button>
-                </div>
-              </div>
-            </div> */}
           </div> 
         </section> 
 
@@ -188,90 +96,29 @@ export default function MyCompanion() {
               <h1 class="pageHeader__title">Find your Companion's</h1>
             </div></div>
             <div className="row y-gap-30 pt-30">
-              {/* { {speedFeatures.map((elm, i) => ())}} */}
+               {companionData.map((elm, i) => (
               <div className="col-4">
                 <div className="tourCard -type-2">
                   <div className="user-h">
-                    <img src="/img/user-img-1.jpg" alt="image" />
+                    <img src={elm.attributes.Photourl} alt="image" />
                   </div>
                   <div class="tourCard__content">
                     <h3 class="tourCard__title mt-5">
-                      <span>Nayana A N</span></h3>
-                    <div class="d-flex items-center text-14">25 years <span className="pl-20 pr-20">  | </span> Female</div>
+                      <span>{elm.attributes.Name}</span></h3>
+                    <div class="d-flex items-center text-14">{elm.attributes.Age} <span className="pl-20 pr-20">  | </span> {elm.attributes.Gender}</div>
                     <div class="tourCard__location mt-10 mb-20">
                       <i class="icon-pin"></i> Bangalore, India</div>
                     <button class="button -outline-accent-1  pl-10 pr-10 pt-5 pb-5"> Connect</button>
                   </div>
                 </div>
               </div>
-              {/* <div className="col-4">
-                <div className="tourCard -type-2">
-                  <div className="user-h">
-                    <img src="/img/user-img-2.jpg" alt="image" />
-                  </div>
-                  <div class="tourCard__content">
-                    <h3 class="tourCard__title mt-5">
-                      <span>Nayana A N</span></h3>
-                    <div class="d-flex items-center text-14">25 years <span className="pl-20 pr-20">  | </span> Female</div>
-                    <div class="tourCard__location mt-10 mb-20">
-                      <i class="icon-pin"></i> Bangalore, India</div>
-                    <button class="button -outline-accent-1  pl-10 pr-10 pt-5 pb-5"> Connect</button>
-                  </div>
-                </div>
-              </div>
-              <div className="col-4">
-                <div className="tourCard -type-2">
-                  <div className="user-h">
-                    <img src="/img/user-img-3.jpg" alt="image" />
-                  </div>
-                  <div class="tourCard__content">
-                    <h3 class="tourCard__title mt-5">
-                      <span>Nayana A N</span></h3>
-                    <div class="d-flex items-center text-14">25 years <span className="pl-20 pr-20">  | </span> Female</div>
-                    <div class="tourCard__location mt-10 mb-20">
-                      <i class="icon-pin"></i> Bangalore, India</div>
-                    <button class="button -outline-accent-1  pl-10 pr-10 pt-5 pb-5"> Connect</button>
-                  </div>
-                </div>
-              </div>
-              <div className="col-4">
-                <div className="tourCard -type-2">
-                  <div className="user-h">
-                    <img src="/img/user-img-4.jpg" alt="image" />
-                  </div>
-                  <div class="tourCard__content">
-                    <h3 class="tourCard__title mt-5">
-                      <span>Nayana A N</span></h3>
-                    <div class="d-flex items-center text-14">25 years <span className="pl-20 pr-20">  | </span> Female</div>
-                    <div class="tourCard__location mt-10 mb-20">
-                      <i class="icon-pin"></i> Bangalore, India</div>
-                    <button class="button -outline-accent-1  pl-10 pr-10 pt-5 pb-5"> Connect</button>
-                  </div>
-                </div>
-              </div>
-              <div className="col-4">
-                <div className="tourCard -type-2">
-                  <div className="user-h">
-                    <img src="/img/user-img-1.jpg" alt="image" />
-                  </div>
-                  <div class="tourCard__content">
-                    <h3 class="tourCard__title mt-5">
-                      <span>Nayana A N</span></h3>
-                    <div class="d-flex items-center text-14">25 years <span className="pl-20 pr-20">  | </span> Female</div>
-                    <div class="tourCard__location mt-10 mb-20">
-                      <i class="icon-pin"></i> Bangalore, India</div>
-                    <button class="button -outline-accent-1  pl-10 pr-10 pt-5 pb-5"> Connect</button>
-                  </div>
-                </div>
-              </div> */}
+            ))} 
             </div>
           </div>
         </section>
-
-
-
         <FooterFour />
       </main>
     </>
   );
 }
+
